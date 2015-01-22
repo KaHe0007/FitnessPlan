@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="FitnessClient.Views.PlanView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:e="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:behaviors="clr-namespace:FitnessClientLibrary.Extension;assembly=FitnessClientLibrary"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock Text="Verzeichnis wählen:"/>
+            <ComboBox Width="200" ItemsSource="{Binding Verzeichnisse}" 
+                          DisplayMemberPath="Titel" SelectedItem="{Binding SelectedVerzeichnis.Value}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Kalenderwoche:" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox Width="80" ItemsSource="{Binding Weeks}" SelectedItem="{Binding SelectedWeek}" Grid.Row="0" Grid.Column="1"/>
+
+                <TextBlock Text="Wochentag:" Grid.Row="1" Grid.Column="0"/>
+                <ComboBox Width="80" ItemsSource="{Binding Weekdays}" SelectedItem="{Binding SelectedWeekday}" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+        </StackPanel>
+
+        <TreeView Grid.Row="1" Grid.Column="0" Grid.RowSpan="7" Height="550" Width="350" ItemsSource="{Binding Themen}" HorizontalAlignment="Left">
+            <e:Interaction.Behaviors>
+                <behaviors:SelectableTreeViewBehavior SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}"/>
+            </e:Interaction.Behaviors>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Uebung}">
+                    <TextBlock Text="{Binding Name}"/>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Height="25"/>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+            <Button Command="{Binding UebungAddCommand}" Content=">" Width="25" />
+            <Button Command="{Binding UebungDeleteCommand}" Content="x" Width="25" />
+        </StackPanel>
+
+        <TreeView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedUebungen, Mode=TwoWay}" Width="350" Height="350" HorizontalAlignment="Right">
+            <e:Interaction.Behaviors>
+                <behaviors:SelectableTreeViewBehavior SelectedItem="{Binding SelectedUebungItem, Mode=TwoWay}"/>
+            </e:Interaction.Behaviors>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Uebung}">
+                    <TextBlock Text="{Binding Name}"/>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Height="25"/>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+        <Button Content="Plan speichern" Command="{Binding SavePlanCommand}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right"/>
+    </Grid>
+</UserControl>
