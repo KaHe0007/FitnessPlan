@@ -22,12 +22,12 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Width="200" ItemsSource="{Binding Verzeichnisse}" SelectedItem="{Binding SelectedVerzeichnis}" DisplayMemberPath="Titel"/>
+                <ComboBox Width="200" ItemsSource="{Binding Verzeichnisse}" SelectedItem="{Binding SelectedVerzeichnis.Value}" DisplayMemberPath="Titel"/>
 
                 <ListBox Height="100" Width="200" Grid.RowSpan="4" ItemsSource="{Binding Themen}" HorizontalAlignment="Left"
                             DisplayMemberPath="Name" SelectedItem="{Binding SelectedThema}" Grid.Row="1" />
@@ -37,7 +37,7 @@
 
                 <TextBlock Text="Trainingsart:" Grid.Row="1" Grid.Column="1" Margin="120,0,0,0"/>
                 <ComboBox ItemsSource="{Binding Trainingsarten}" SelectedValue="{Binding SelectedThema.TrainingsartId}" 
-                          DisplayMemberPath="Trainingsart" Grid.Row="1" Grid.Column="2"/>
+                          DisplayMemberPath="Art" SelectedValuePath="TrainingsartId" Grid.Row="1" Grid.Column="2"/>
 
                 <TextBlock Text="Beschreibung:" Grid.Row="2" Grid.Column="1" Margin="120,0,0,0"/>
                 <TextBox Text="{Binding SelectedThema.Beschreibung}" Grid.Row="2" Grid.Column="2"/>
@@ -53,25 +53,25 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Verzeichnis:" Margin="0,0,10,0"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" Width="200" ItemsSource="{Binding Verzeichnisse}" 
-                          DisplayMemberPath="Titel" SelectedValue="{Binding NeuesThema.VerzeichnisId}"/>
+                          DisplayMemberPath="Titel" SelectedValuePath="VerzeichnisId" SelectedValue="{Binding NeuesThema.VerzeichnisId}"/>
 
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Thema"/>
-                <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding NeuesThema.Name}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Thema:"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NeuesThema.Name}"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Trainingsart:" Margin="0,0,10,0"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" Width="200" ItemsSource="{Binding Trainingsarten}" 
-                          DisplayMemberPath="Trainingsart" SelectedValue="{Binding NeuesThema.TrainingsartId}"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="Trainingsart:" Margin="0,0,10,0"/>
+                <ComboBox Grid.Row="1" Grid.Column="3" Width="200" ItemsSource="{Binding Trainingsarten}" 
+                          DisplayMemberPath="Art" SelectedValue="{Binding NeuesThema.TrainingsartId}" SelectedValuePath="TrainingsartId"/>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Beschreibung"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NeuesThema.Beschreibung}" Grid.ColumnSpan="2" Width="290"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NeuesThema.Beschreibung}" Grid.ColumnSpan="3" Width="290"/>
 
                 <Button Grid.Row="2" Grid.Column="3" Content="Hinzufügen" Command="{Binding AddCommand}" HorizontalAlignment="Right"/>
             </Grid>

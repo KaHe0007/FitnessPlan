@@ -16,13 +16,13 @@ namespace FitnessClient.DataModels
             }
         }
 
-        private IView _UebungView;
+        private IView _uebungView;
         public IView UebungView
         {
-            get { return _UebungView; }
+            get { return _uebungView; }
             set
             {
-                _UebungView = value;
+                _uebungView = value;
                 NotifyPropertyChanged("UebungView");
             }
         }
@@ -46,6 +46,17 @@ namespace FitnessClient.DataModels
             {
                 _planungView = value;
                 NotifyPropertyChanged("PlanungView");
+            }
+        }
+        
+        private IView _trainingView;
+        public IView TrainingView
+        {
+            get { return _trainingView; }
+            set
+            {
+                _trainingView = value;
+                NotifyPropertyChanged("TrainingView");
             }
         }
     }

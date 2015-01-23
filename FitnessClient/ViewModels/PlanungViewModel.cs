@@ -13,22 +13,53 @@ namespace FitnessClient.ViewModels
     {
         public PlanungViewModel()
         {
-            Verzeichnisse = FitnessDataService.Instance.VerzeichnisService.Select();
-            var today = DateTime.Now;
-            Weeks = WeeksHelper.GetWeeks(today);
-            Weekdays = WeeksHelper.WeekDays();
-            SelectedTreeItem = new Uebung();
-            SelectedWeek = WeeksHelper.GetWeekOfYear(today);
-            SelectedVerzeichnis = new ObservableProperty<Verzeichnis>();
-            SelectedVerzeichnis.Subscribe(LoadThema);
-            SelectedVerzeichnis.Value = Verzeichnisse.First();
+            LoadWeeksAndDays();
+            LoadTree();
+            Wochenplan = new List<Plan>();
             SelectedUebungen = new List<Thema>();
         }
 
-        private void LoadThema(Verzeichnis verzeichnis)
+        private void LoadTree()
+        {
+            Verzeichnisse = FitnessDataService.Instance.VerzeichnisService.Select();
+            SelectedTreeItem = new Uebung();
+            SelectedVerzeichnis = new ObservableProperty<Verzeichnis>();
+            SelectedVerzeichnis.Subscribe(SubscribeVerzeichnis);
+            SelectedVerzeichnis.Value = Verzeichnisse.First();
+        }
+
+        private void LoadWeeksAndDays()
+        {
+            var today = DateTime.Now;
+            Weeks = WeeksHelper.GetWeeks(today);
+            Weekdays = WeeksHelper.WeekDays();
+
+            SelectedWeek = new ObservableProperty<int>();
+            SelectedWeek.Subscribe(SubscribeWeek);
+            SelectedWeek.Value = WeeksHelper.GetWeekOfYear(today);
+            
+            SelectedWeekday = new ObservableProperty<string>();
+            SelectedWeekday.Subscribe(SubscribeWeekday);
+            SelectedWeekday.Value = Weekdays.First();
+        }
+
+        private void SubscribeWeek(int week)
+        {
+            var monday = WeeksHelper.FirstDateOfWeek(DateTime.Now.Year, week);
+            var sunday = monday.AddDays(7);
+            var plan = FitnessDataService.Instance.PlanService.Select().Where(x => x.Datum >= monday && x.Datum <= sunday);
+            Wochenplan = plan.ToList();
+        }
+
+        private void SubscribeVerzeichnis(Verzeichnis verzeichnis)
         {
             Themen = FitnessDataService.Instance.ThemaService.Select()
                                   .Where(x => x.VerzeichnisId == verzeichnis.VerzeichnisId);
+        }
+
+        private void SubscribeWeekday(string weekday)
+        {
+            
         }
 
         private RelayCommand _uebungAddCommand;
@@ -43,6 +74,7 @@ namespace FitnessClient.ViewModels
         private void UebungAdd(object value)
         {
             var dummy = new List<Thema>();
+            dummy = SelectedUebungen;
             var thema = SelectedTreeItem as Thema;
             if (thema != null)
             {
@@ -116,7 +148,7 @@ namespace FitnessClient.ViewModels
 
         private void SavePlan(object value)
         {
-
+            var a = Wochenplan;
         }
     }
 }

@@ -4,20 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="18766e4994cb4e9faac1fa4374d3e058" Name="Diagramm1" ZoomLevel="124">
-        <EntityTypeShape EntityType="FitnessAppModel.Benutzer" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="FitnessAppModel.Thema" Width="1.5" PointX="2.875" PointY="3.125" />
-        <EntityTypeShape EntityType="FitnessAppModel.Verzeichnis" Width="1.5" PointX="5.375" PointY="3.75" />
-        <AssociationConnector Association="FitnessAppModel.FK_Thema_Verzeichnis" />
-        <EntityTypeShape EntityType="FitnessAppModel.Plan" Width="1.5" PointX="3.125" PointY="0.5" />
-        <EntityTypeShape EntityType="FitnessAppModel.Programm" Width="1.5" PointX="5.5" PointY="0.5" />
-        <AssociationConnector Association="FitnessAppModel.FK_Plan_Benutzer" />
-        <AssociationConnector Association="FitnessAppModel.FK_Programm_Plan" />
-        <EntityTypeShape EntityType="FitnessAppModel.Trainingsart" Width="1.5" PointX="0.5" PointY="3.375" />
-        <EntityTypeShape EntityType="FitnessAppModel.Uebung" Width="1.5" PointX="7.625" PointY="3" />
+      <Diagram DiagramId="18766e4994cb4e9faac1fa4374d3e058" Name="Diagramm1" ZoomLevel="116">
+        <AssociationConnector Association="FitnessAppModel.FK_Programm_Uebung" />
+        <AssociationConnector Association="FitnessAppModel.FK_Uebung_ThemaId" />
+        <EntityTypeShape EntityType="FitnessAppModel.Benutzer" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="FitnessAppModel.Programm" Width="1.5" PointX="8" PointY="0.5" />
+        <EntityTypeShape EntityType="FitnessAppModel.Thema" Width="1.5" PointX="5.5" PointY="3.375" />
+        <EntityTypeShape EntityType="FitnessAppModel.Trainingsart" Width="1.5" PointX="2.625" PointY="4" />
+        <EntityTypeShape EntityType="FitnessAppModel.Uebung" Width="1.5" PointX="8" PointY="3.375" />
+        <EntityTypeShape EntityType="FitnessAppModel.Verzeichnis" Width="1.5" PointX="0.625" PointY="3.25" />
         <AssociationConnector Association="FitnessAppModel.FK_Programm_Uebung" />
         <AssociationConnector Association="FitnessAppModel.FK_Thema_Trainingsart" />
-        <AssociationConnector Association="FitnessAppModel.FK_Uebung_ThemaId" />
+        <AssociationConnector Association="FitnessAppModel.FK_Thema_Verzeichnis" />
+        <AssociationConnector Association="FitnessAppModel.FK_Uebung_Thema" />
+        <EntityTypeShape EntityType="FitnessAppModel.Plan" Width="1.5" PointX="2.875" PointY="0.5" />
+        <EntityTypeShape EntityType="FitnessAppModel.Training" Width="1.5" PointX="5.5" PointY="1" />
+        <AssociationConnector Association="FitnessAppModel.FK_Plan_Benutzer" />
+        <AssociationConnector Association="FitnessAppModel.FK_Programm_Plan" />
+        <AssociationConnector Association="FitnessAppModel.FK_Training_Plan" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

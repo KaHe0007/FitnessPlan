@@ -12,16 +12,13 @@ namespace FitnessClient
     using System;
     using System.Collections.Generic;
     
-    public partial class Trainingsart
+    public partial class Training
     {
-        public Trainingsart()
-        {
-            this.Thema = new HashSet<Thema>();
-        }
+        public int TrainingId { get; set; }
+        public int PlanId { get; set; }
+        public bool Absolviert { get; set; }
+        public string Bemerkung { get; set; }
     
-        public int TrainingsartId { get; set; }
-        public string Art { get; set; }
-    
-        public virtual ICollection<Thema> Thema { get; set; }
+        public virtual Plan Plan { get; set; }
     }
 }

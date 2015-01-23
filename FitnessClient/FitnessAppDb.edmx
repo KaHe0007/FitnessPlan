@@ -10,6 +10,7 @@
           <EntitySet Name="Plan" EntityType="FitnessAppModel.Store.Plan" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Programm" EntityType="FitnessAppModel.Store.Programm" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Thema" EntityType="FitnessAppModel.Store.Thema" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Training" EntityType="FitnessAppModel.Store.Training" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Trainingsart" EntityType="FitnessAppModel.Store.Trainingsart" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Uebung" EntityType="FitnessAppModel.Store.Uebung" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Verzeichnis" EntityType="FitnessAppModel.Store.Verzeichnis" store:Type="Tables" Schema="dbo" />
@@ -21,7 +22,7 @@
             <End Role="Plan" EntitySet="Plan" />
             <End Role="Programm" EntitySet="Programm" />
           </AssociationSet>
-          <AssociationSet Name="FK_Programm_Uebungen" Association="FitnessAppModel.Store.FK_Programm_Uebungen">
+          <AssociationSet Name="FK_Programm_Uebung" Association="FitnessAppModel.Store.FK_Programm_Uebung">
             <End Role="Uebung" EntitySet="Uebung" />
             <End Role="Programm" EntitySet="Programm" />
           </AssociationSet>
@@ -33,7 +34,11 @@
             <End Role="Verzeichnis" EntitySet="Verzeichnis" />
             <End Role="Thema" EntitySet="Thema" />
           </AssociationSet>
-          <AssociationSet Name="FK_Uebungen_ThemaId" Association="FitnessAppModel.Store.FK_Uebungen_ThemaId">
+          <AssociationSet Name="FK_Training_Plan" Association="FitnessAppModel.Store.FK_Training_Plan">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="Training" EntitySet="Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uebung_Thema" Association="FitnessAppModel.Store.FK_Uebung_Thema">
             <End Role="Thema" EntitySet="Thema" />
             <End Role="Uebung" EntitySet="Uebung" />
           </AssociationSet>
@@ -71,12 +76,21 @@
           <Property Name="Beschreibung" Type="varchar" MaxLength="450" />
           <Property Name="TrainingsartId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Training">
+          <Key>
+            <PropertyRef Name="TrainingId" />
+          </Key>
+          <Property Name="TrainingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PlanId" Type="int" Nullable="false" />
+          <Property Name="Absolviert" Type="bit" Nullable="false" />
+          <Property Name="Bemerkung" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Trainingsart">
           <Key>
             <PropertyRef Name="TrainingsartId" />
           </Key>
           <Property Name="TrainingsartId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Trainingsart" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Art" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Uebung">
           <Key>
@@ -124,7 +138,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Programm_Uebungen">
+        <Association Name="FK_Programm_Uebung">
           <End Role="Uebung" Type="FitnessAppModel.Store.Uebung" Multiplicity="0..1" />
           <End Role="Programm" Type="FitnessAppModel.Store.Programm" Multiplicity="*" />
           <ReferentialConstraint>
@@ -160,7 +174,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Uebungen_ThemaId">
+        <Association Name="FK_Training_Plan">
+          <End Role="Plan" Type="FitnessAppModel.Store.Plan" Multiplicity="1" />
+          <End Role="Training" Type="FitnessAppModel.Store.Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanId" />
+            </Principal>
+            <Dependent Role="Training">
+              <PropertyRef Name="PlanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uebung_Thema">
           <End Role="Thema" Type="FitnessAppModel.Store.Thema" Multiplicity="1" />
           <End Role="Uebung" Type="FitnessAppModel.Store.Uebung" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,14 +204,29 @@
       <Schema Namespace="FitnessAppModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="FitnessAppEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Benutzer" EntityType="FitnessAppModel.Benutzer" />
+          <EntitySet Name="Programm" EntityType="FitnessAppModel.Programm" />
           <EntitySet Name="Thema" EntityType="FitnessAppModel.Thema" />
+          <EntitySet Name="Trainingsart" EntityType="FitnessAppModel.Trainingsart" />
+          <EntitySet Name="Uebung" EntityType="FitnessAppModel.Uebung" />
           <EntitySet Name="Verzeichnis" EntityType="FitnessAppModel.Verzeichnis" />
+          <AssociationSet Name="FK_Programm_Uebung" Association="FitnessAppModel.FK_Programm_Uebung">
+            <End Role="Uebung" EntitySet="Uebung" />
+            <End Role="Programm" EntitySet="Programm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Thema_Trainingsart" Association="FitnessAppModel.FK_Thema_Trainingsart">
+            <End Role="Trainingsart" EntitySet="Trainingsart" />
+            <End Role="Thema" EntitySet="Thema" />
+          </AssociationSet>
           <AssociationSet Name="FK_Thema_Verzeichnis" Association="FitnessAppModel.FK_Thema_Verzeichnis">
             <End Role="Verzeichnis" EntitySet="Verzeichnis" />
             <End Role="Thema" EntitySet="Thema" />
           </AssociationSet>
+          <AssociationSet Name="FK_Uebung_Thema" Association="FitnessAppModel.FK_Uebung_Thema">
+            <End Role="Thema" EntitySet="Thema" />
+            <End Role="Uebung" EntitySet="Uebung" />
+          </AssociationSet>
           <EntitySet Name="Plan" EntityType="FitnessAppModel.Plan" />
-          <EntitySet Name="Programm" EntityType="FitnessAppModel.Programm" />
+          <EntitySet Name="Training" EntityType="FitnessAppModel.Training" />
           <AssociationSet Name="FK_Plan_Benutzer" Association="FitnessAppModel.FK_Plan_Benutzer">
             <End Role="Benutzer" EntitySet="Benutzer" />
             <End Role="Plan" EntitySet="Plan" />
@@ -194,19 +235,9 @@
             <End Role="Plan" EntitySet="Plan" />
             <End Role="Programm" EntitySet="Programm" />
           </AssociationSet>
-          <EntitySet Name="Trainingsart" EntityType="FitnessAppModel.Trainingsart" />
-          <EntitySet Name="Uebung" EntityType="FitnessAppModel.Uebung" />
-          <AssociationSet Name="FK_Programm_Uebungen" Association="FitnessAppModel.FK_Programm_Uebungen">
-            <End Role="Uebung" EntitySet="Uebung" />
-            <End Role="Programm" EntitySet="Programm" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Thema_Trainingsart" Association="FitnessAppModel.FK_Thema_Trainingsart">
-            <End Role="Trainingsart" EntitySet="Trainingsart" />
-            <End Role="Thema" EntitySet="Thema" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Uebungen_ThemaId" Association="FitnessAppModel.FK_Uebungen_ThemaId">
-            <End Role="Thema" EntitySet="Thema" />
-            <End Role="Uebung" EntitySet="Uebung" />
+          <AssociationSet Name="FK_Training_Plan" Association="FitnessAppModel.FK_Training_Plan">
+            <End Role="Plan" EntitySet="Plan" />
+            <End Role="Training" EntitySet="Training" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Benutzer">
@@ -217,6 +248,16 @@
           <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Plan" Relationship="FitnessAppModel.FK_Plan_Benutzer" FromRole="Benutzer" ToRole="Plan" />
         </EntityType>
+        <EntityType Name="Programm">
+          <Key>
+            <PropertyRef Name="ProgrammId" />
+          </Key>
+          <Property Type="Int32" Name="ProgrammId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PlanId" />
+          <Property Type="Int32" Name="UebungId" />
+          <NavigationProperty Name="Uebung" Relationship="FitnessAppModel.FK_Programm_Uebung" FromRole="Programm" ToRole="Uebung" />
+          <NavigationProperty Name="Plan" Relationship="FitnessAppModel.FK_Programm_Plan" FromRole="Programm" ToRole="Plan" />
+        </EntityType>
         <EntityType Name="Thema">
           <Key>
             <PropertyRef Name="ThemaId" />
@@ -226,9 +267,32 @@
           <Property Type="Int32" Name="VerzeichnisId" Nullable="false" />
           <Property Type="String" Name="Beschreibung" MaxLength="450" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="TrainingsartId" Nullable="false" />
-          <NavigationProperty Name="Verzeichnis" Relationship="FitnessAppModel.FK_Thema_Verzeichnis" FromRole="Thema" ToRole="Verzeichnis" />
           <NavigationProperty Name="Trainingsart" Relationship="FitnessAppModel.FK_Thema_Trainingsart" FromRole="Thema" ToRole="Trainingsart" />
-          <NavigationProperty Name="Uebung" Relationship="FitnessAppModel.FK_Uebungen_ThemaId" FromRole="Thema" ToRole="Uebung" />
+          <NavigationProperty Name="Verzeichnis" Relationship="FitnessAppModel.FK_Thema_Verzeichnis" FromRole="Thema" ToRole="Verzeichnis" />
+          <NavigationProperty Name="Uebung" Relationship="FitnessAppModel.FK_Uebung_Thema" FromRole="Thema" ToRole="Uebung" />
+        </EntityType>
+        <EntityType Name="Trainingsart">
+          <Key>
+            <PropertyRef Name="TrainingsartId" />
+          </Key>
+          <Property Type="Int32" Name="TrainingsartId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Art" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Thema" Relationship="FitnessAppModel.FK_Thema_Trainingsart" FromRole="Trainingsart" ToRole="Thema" />
+        </EntityType>
+        <EntityType Name="Uebung">
+          <Key>
+            <PropertyRef Name="UebungId" />
+          </Key>
+          <Property Type="Int32" Name="UebungId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Beschreibung" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Bildpfad" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Stufe" Nullable="false" />
+          <Property Type="Int32" Name="StdWiederholung" />
+          <Property Type="Int32" Name="StdDauer" />
+          <Property Type="Int32" Name="ThemaId" Nullable="false" />
+          <NavigationProperty Name="Programm" Relationship="FitnessAppModel.FK_Programm_Uebung" FromRole="Uebung" ToRole="Programm" />
+          <NavigationProperty Name="Thema" Relationship="FitnessAppModel.FK_Uebung_Thema" FromRole="Uebung" ToRole="Thema" />
         </EntityType>
         <EntityType Name="Verzeichnis">
           <Key>
@@ -240,6 +304,30 @@
           <Property Type="String" Name="Quelle" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Thema" Relationship="FitnessAppModel.FK_Thema_Verzeichnis" FromRole="Verzeichnis" ToRole="Thema" />
         </EntityType>
+        <Association Name="FK_Programm_Uebung">
+          <End Type="FitnessAppModel.Uebung" Role="Uebung" Multiplicity="0..1" />
+          <End Type="FitnessAppModel.Programm" Role="Programm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uebung">
+              <PropertyRef Name="UebungId" />
+            </Principal>
+            <Dependent Role="Programm">
+              <PropertyRef Name="UebungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Thema_Trainingsart">
+          <End Type="FitnessAppModel.Trainingsart" Role="Trainingsart" Multiplicity="1" />
+          <End Type="FitnessAppModel.Thema" Role="Thema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainingsart">
+              <PropertyRef Name="TrainingsartId" />
+            </Principal>
+            <Dependent Role="Thema">
+              <PropertyRef Name="TrainingsartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Thema_Verzeichnis">
           <End Type="FitnessAppModel.Verzeichnis" Role="Verzeichnis" Multiplicity="1" />
           <End Type="FitnessAppModel.Thema" Role="Thema" Multiplicity="*" />
@@ -252,6 +340,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Uebung_Thema">
+          <End Type="FitnessAppModel.Thema" Role="Thema" Multiplicity="1" />
+          <End Type="FitnessAppModel.Uebung" Role="Uebung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thema">
+              <PropertyRef Name="ThemaId" />
+            </Principal>
+            <Dependent Role="Uebung">
+              <PropertyRef Name="ThemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Plan">
           <Key>
             <PropertyRef Name="PlanId" />
@@ -261,16 +361,17 @@
           <Property Type="DateTime" Name="Datum" Precision="0" />
           <NavigationProperty Name="Benutzer" Relationship="FitnessAppModel.FK_Plan_Benutzer" FromRole="Plan" ToRole="Benutzer" />
           <NavigationProperty Name="Programm" Relationship="FitnessAppModel.FK_Programm_Plan" FromRole="Plan" ToRole="Programm" />
+          <NavigationProperty Name="Training" Relationship="FitnessAppModel.FK_Training_Plan" FromRole="Plan" ToRole="Training" />
         </EntityType>
-        <EntityType Name="Programm">
+        <EntityType Name="Training">
           <Key>
-            <PropertyRef Name="ProgrammId" />
+            <PropertyRef Name="TrainingId" />
           </Key>
-          <Property Type="Int32" Name="ProgrammId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="PlanId" />
-          <Property Type="Int32" Name="UebungId" />
-          <NavigationProperty Name="Plan" Relationship="FitnessAppModel.FK_Programm_Plan" FromRole="Programm" ToRole="Plan" />
-          <NavigationProperty Name="Uebung" Relationship="FitnessAppModel.FK_Programm_Uebungen" FromRole="Programm" ToRole="Uebung" />
+          <Property Type="Int32" Name="TrainingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PlanId" Nullable="false" />
+          <Property Type="Boolean" Name="Absolviert" Nullable="false" />
+          <Property Type="String" Name="Bemerkung" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plan" Relationship="FitnessAppModel.FK_Training_Plan" FromRole="Training" ToRole="Plan" />
         </EntityType>
         <Association Name="FK_Plan_Benutzer">
           <End Type="FitnessAppModel.Benutzer" Role="Benutzer" Multiplicity="0..1" />
@@ -296,62 +397,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Trainingsart">
-          <Key>
-            <PropertyRef Name="TrainingsartId" />
-          </Key>
-          <Property Type="Int32" Name="TrainingsartId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Trainingsart1" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Thema" Relationship="FitnessAppModel.FK_Thema_Trainingsart" FromRole="Trainingsart" ToRole="Thema" />
-        </EntityType>
-        <EntityType Name="Uebung">
-          <Key>
-            <PropertyRef Name="UebungId" />
-          </Key>
-          <Property Type="Int32" Name="UebungId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Beschreibung" MaxLength="350" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Bildpfad" MaxLength="350" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="Stufe" Nullable="false" />
-          <Property Type="Int32" Name="StdWiederholung" />
-          <Property Type="Int32" Name="StdDauer" />
-          <Property Type="Int32" Name="ThemaId" Nullable="false" />
-          <NavigationProperty Name="Programm" Relationship="FitnessAppModel.FK_Programm_Uebungen" FromRole="Uebung" ToRole="Programm" />
-          <NavigationProperty Name="Thema" Relationship="FitnessAppModel.FK_Uebungen_ThemaId" FromRole="Uebung" ToRole="Thema" />
-        </EntityType>
-        <Association Name="FK_Programm_Uebungen">
-          <End Type="FitnessAppModel.Uebung" Role="Uebung" Multiplicity="0..1" />
-          <End Type="FitnessAppModel.Programm" Role="Programm" Multiplicity="*" />
+        <Association Name="FK_Training_Plan">
+          <End Type="FitnessAppModel.Plan" Role="Plan" Multiplicity="1" />
+          <End Type="FitnessAppModel.Training" Role="Training" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Uebung">
-              <PropertyRef Name="UebungId" />
+            <Principal Role="Plan">
+              <PropertyRef Name="PlanId" />
             </Principal>
-            <Dependent Role="Programm">
-              <PropertyRef Name="UebungId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Thema_Trainingsart">
-          <End Type="FitnessAppModel.Trainingsart" Role="Trainingsart" Multiplicity="1" />
-          <End Type="FitnessAppModel.Thema" Role="Thema" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Trainingsart">
-              <PropertyRef Name="TrainingsartId" />
-            </Principal>
-            <Dependent Role="Thema">
-              <PropertyRef Name="TrainingsartId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Uebungen_ThemaId">
-          <End Type="FitnessAppModel.Thema" Role="Thema" Multiplicity="1" />
-          <End Type="FitnessAppModel.Uebung" Role="Uebung" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Thema">
-              <PropertyRef Name="ThemaId" />
-            </Principal>
-            <Dependent Role="Uebung">
-              <PropertyRef Name="ThemaId" />
+            <Dependent Role="Training">
+              <PropertyRef Name="PlanId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -369,6 +423,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Programm">
+            <EntityTypeMapping TypeName="FitnessAppModel.Programm">
+              <MappingFragment StoreEntitySet="Programm">
+                <ScalarProperty Name="UebungId" ColumnName="UebungId" />
+                <ScalarProperty Name="PlanId" ColumnName="PlanId" />
+                <ScalarProperty Name="ProgrammId" ColumnName="ProgrammId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Thema">
             <EntityTypeMapping TypeName="FitnessAppModel.Thema">
               <MappingFragment StoreEntitySet="Thema">
@@ -377,6 +440,28 @@
                 <ScalarProperty Name="VerzeichnisId" ColumnName="VerzeichnisId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ThemaId" ColumnName="ThemaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainingsart">
+            <EntityTypeMapping TypeName="FitnessAppModel.Trainingsart">
+              <MappingFragment StoreEntitySet="Trainingsart">
+                <ScalarProperty Name="Art" ColumnName="Art" />
+                <ScalarProperty Name="TrainingsartId" ColumnName="TrainingsartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uebung">
+            <EntityTypeMapping TypeName="FitnessAppModel.Uebung">
+              <MappingFragment StoreEntitySet="Uebung">
+                <ScalarProperty Name="ThemaId" ColumnName="ThemaId" />
+                <ScalarProperty Name="StdDauer" ColumnName="StdDauer" />
+                <ScalarProperty Name="StdWiederholung" ColumnName="StdWiederholung" />
+                <ScalarProperty Name="Stufe" ColumnName="Stufe" />
+                <ScalarProperty Name="Bildpfad" ColumnName="Bildpfad" />
+                <ScalarProperty Name="Beschreibung" ColumnName="Beschreibung" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UebungId" ColumnName="UebungId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -399,34 +484,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Programm">
-            <EntityTypeMapping TypeName="FitnessAppModel.Programm">
-              <MappingFragment StoreEntitySet="Programm">
-                <ScalarProperty Name="UebungId" ColumnName="UebungId" />
+          <EntitySetMapping Name="Training">
+            <EntityTypeMapping TypeName="FitnessAppModel.Training">
+              <MappingFragment StoreEntitySet="Training">
+                <ScalarProperty Name="Bemerkung" ColumnName="Bemerkung" />
+                <ScalarProperty Name="Absolviert" ColumnName="Absolviert" />
                 <ScalarProperty Name="PlanId" ColumnName="PlanId" />
-                <ScalarProperty Name="ProgrammId" ColumnName="ProgrammId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trainingsart">
-            <EntityTypeMapping TypeName="FitnessAppModel.Trainingsart">
-              <MappingFragment StoreEntitySet="Trainingsart">
-                <ScalarProperty Name="Trainingsart1" ColumnName="Trainingsart" />
-                <ScalarProperty Name="TrainingsartId" ColumnName="TrainingsartId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Uebung">
-            <EntityTypeMapping TypeName="FitnessAppModel.Uebung">
-              <MappingFragment StoreEntitySet="Uebung">
-                <ScalarProperty Name="ThemaId" ColumnName="ThemaId" />
-                <ScalarProperty Name="StdDauer" ColumnName="StdDauer" />
-                <ScalarProperty Name="StdWiederholung" ColumnName="StdWiederholung" />
-                <ScalarProperty Name="Stufe" ColumnName="Stufe" />
-                <ScalarProperty Name="Bildpfad" ColumnName="Bildpfad" />
-                <ScalarProperty Name="Beschreibung" ColumnName="Beschreibung" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="UebungId" ColumnName="UebungId" />
+                <ScalarProperty Name="TrainingId" ColumnName="TrainingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

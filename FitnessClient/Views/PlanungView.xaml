@@ -50,23 +50,23 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Kalenderwoche:" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox Width="80" ItemsSource="{Binding Weeks}" SelectedItem="{Binding SelectedWeek}" Grid.Row="0" Grid.Column="1"/>
+                <ComboBox Width="120" ItemsSource="{Binding Weeks}" SelectedItem="{Binding SelectedWeek.Value}" Grid.Row="0" Grid.Column="1"/>
 
                 <TextBlock Text="Wochentag:" Grid.Row="1" Grid.Column="0"/>
-                <ComboBox Width="80" ItemsSource="{Binding Weekdays}" SelectedItem="{Binding SelectedWeekday}" Grid.Row="1" Grid.Column="1"/>
+                <ComboBox Width="120" ItemsSource="{Binding Weekdays}" SelectedValue="{Binding SelectedWeekday.Value}" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </StackPanel>
 
-        <TreeView Grid.Row="1" Grid.Column="0" Grid.RowSpan="7" Height="550" Width="350" ItemsSource="{Binding Themen}" HorizontalAlignment="Left">
+        <TreeView Grid.Row="1" Grid.Column="0" Grid.RowSpan="7" Height="350" Width="350" ItemsSource="{Binding Themen}" HorizontalAlignment="Left">
             <e:Interaction.Behaviors>
                 <behaviors:SelectableTreeViewBehavior SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}"/>
             </e:Interaction.Behaviors>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Uebung}">
-                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock Text="{Binding Name}" FontSize="14"/>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" Height="25"/>
+                            <TextBlock Text="{Binding Name}" FontSize="14"/>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
@@ -84,10 +84,10 @@
             </e:Interaction.Behaviors>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Uebung}">
-                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock Text="{Binding Name}" FontSize="14"/>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" Height="25"/>
+                            <TextBlock Text="{Binding Name}" FontSize="14" Height="24"/>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>

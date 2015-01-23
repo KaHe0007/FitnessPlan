@@ -64,10 +64,14 @@
     <Compile Include="DataModels\MainDataModel.cs" />
     <Compile Include="DataModels\PlanungDataModel.cs" />
     <Compile Include="DataModels\ThemaDataModel.cs" />
+    <Compile Include="DataModels\TrainingDataModel.cs" />
     <Compile Include="DataModels\UebungDataModel.cs" />
     <Compile Include="DataModels\VerzeichnisDataModel.cs" />
+    <Compile Include="DataService\BenutzerService.cs" />
     <Compile Include="DataService\EntityManager.cs" />
     <Compile Include="DataService\FitnessDataService.cs" />
+    <Compile Include="DataService\PlanService.cs" />
+    <Compile Include="DataService\ProgrammService.cs" />
     <Compile Include="DataService\ThemaService.cs" />
     <Compile Include="DataService\TrainingsartService.cs" />
     <Compile Include="DataService\UebungService.cs" />
@@ -86,6 +90,9 @@
     <Compile Include="Thema.cs">
       <DependentUpon>FitnessAppDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Training.cs">
+      <DependentUpon>FitnessAppDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Trainingsart.cs">
       <DependentUpon>FitnessAppDb.tt</DependentUpon>
     </Compile>
@@ -98,6 +105,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PlanungViewModel.cs" />
     <Compile Include="ViewModels\ThemaViewModel.cs" />
+    <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="ViewModels\UebungViewModel.cs" />
     <Compile Include="ViewModels\VerzeichnisViewModel.cs" />
     <Compile Include="Views\PlanungView.xaml.cs">
@@ -105,6 +113,9 @@
     </Compile>
     <Compile Include="Views\ThemaView.xaml.cs">
       <DependentUpon>ThemaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingView.xaml.cs">
+      <DependentUpon>TrainingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UebungView.xaml.cs">
       <DependentUpon>UebungView.xaml</DependentUpon>
@@ -143,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ThemaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

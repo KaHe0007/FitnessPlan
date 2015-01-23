@@ -25,8 +25,8 @@ namespace FitnessClient
         public string Beschreibung { get; set; }
         public int TrainingsartId { get; set; }
     
-        public virtual Verzeichnis Verzeichnis { get; set; }
         public virtual Trainingsart Trainingsart { get; set; }
+        public virtual Verzeichnis Verzeichnis { get; set; }
         public virtual ICollection<Uebung> Uebung { get; set; }
     }
 }

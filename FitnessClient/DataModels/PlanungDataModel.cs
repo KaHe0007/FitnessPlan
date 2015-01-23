@@ -39,8 +39,8 @@ namespace FitnessClient.DataModels
             }
         }
 
-        private int _selectedWeek;
-        public int SelectedWeek
+        private ObservableProperty<int> _selectedWeek;
+        public ObservableProperty<int> SelectedWeek
         {
             get { return _selectedWeek; }
             set
@@ -60,9 +60,20 @@ namespace FitnessClient.DataModels
                 NotifyPropertyChanged("Weekdays");
             }
         }
+
+        private IList<Plan> _wochenplan;
+        public IList<Plan> Wochenplan
+        {
+            get { return _wochenplan; }
+            set
+            {
+                _wochenplan = value;
+                NotifyPropertyChanged("Wochenplan");
+            }
+        }
         
-        private string _selectedWeekday;
-        public string SelectedWeekday
+        private ObservableProperty<string> _selectedWeekday;
+        public ObservableProperty<string> SelectedWeekday
         {
             get { return _selectedWeekday; }
             set

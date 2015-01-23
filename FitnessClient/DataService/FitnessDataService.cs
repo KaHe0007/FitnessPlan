@@ -6,6 +6,9 @@
         public UebungService UebungService { get; set; }
         public ThemaService ThemaService { get; set; }
         public TrainingsartService TrainingsartService { get; set; }
+        public PlanService PlanService { get; set; }
+        public ProgrammService ProgrammService { get; set; }
+        public BenutzerService BenutzerService { get; set; }
 
         private static FitnessDataService _instance;
 
@@ -15,6 +18,9 @@
             UebungService = new UebungService();
             ThemaService = new ThemaService();
             TrainingsartService = new TrainingsartService();
+            PlanService = new PlanService();
+            ProgrammService = new ProgrammService();
+            BenutzerService = new BenutzerService();
         }
 
         public static FitnessDataService Instance

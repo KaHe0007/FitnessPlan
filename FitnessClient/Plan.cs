@@ -17,6 +17,7 @@ namespace FitnessClient
         public Plan()
         {
             this.Programm = new HashSet<Programm>();
+            this.Training = new HashSet<Training>();
         }
     
         public int PlanId { get; set; }
@@ -25,5 +26,6 @@ namespace FitnessClient
     
         public virtual Benutzer Benutzer { get; set; }
         public virtual ICollection<Programm> Programm { get; set; }
+        public virtual ICollection<Training> Training { get; set; }
     }
 }
