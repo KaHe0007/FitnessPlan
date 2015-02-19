@@ -26,12 +26,13 @@ namespace FitnessClient
         }
     
         public DbSet<Benutzer> Benutzer { get; set; }
+        public DbSet<Plan> Plan { get; set; }
         public DbSet<Programm> Programm { get; set; }
+        public DbSet<Tage> Tage { get; set; }
         public DbSet<Thema> Thema { get; set; }
+        public DbSet<Training> Training { get; set; }
         public DbSet<Trainingsart> Trainingsart { get; set; }
         public DbSet<Uebung> Uebung { get; set; }
         public DbSet<Verzeichnis> Verzeichnis { get; set; }
-        public DbSet<Plan> Plan { get; set; }
-        public DbSet<Training> Training { get; set; }
     }
 }

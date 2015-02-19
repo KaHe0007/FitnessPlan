@@ -14,14 +14,7 @@ namespace FitnessClient
     
     public partial class Trainingsart
     {
-        public Trainingsart()
-        {
-            this.Thema = new HashSet<Thema>();
-        }
-    
         public int TrainingsartId { get; set; }
         public string Art { get; set; }
-    
-        public virtual ICollection<Thema> Thema { get; set; }
     }
 }

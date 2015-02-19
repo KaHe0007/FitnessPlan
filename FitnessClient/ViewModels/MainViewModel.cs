@@ -12,6 +12,7 @@ namespace FitnessClient.ViewModels
             ThemenView = new ThemaView();
             PlanungView = new PlanView();
             TrainingView = new TrainingView();
+            EinstellungenView = new EinstellungenView();
         }
     }
 }

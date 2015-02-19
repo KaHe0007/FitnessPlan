@@ -21,12 +21,10 @@ namespace FitnessClient
     
         public int ThemaId { get; set; }
         public string Name { get; set; }
-        public int VerzeichnisId { get; set; }
+        public Nullable<int> VerzeichnisId { get; set; }
         public string Beschreibung { get; set; }
-        public int TrainingsartId { get; set; }
+        public Nullable<int> TrainingsartId { get; set; }
     
-        public virtual Trainingsart Trainingsart { get; set; }
-        public virtual Verzeichnis Verzeichnis { get; set; }
         public virtual ICollection<Uebung> Uebung { get; set; }
     }
 }

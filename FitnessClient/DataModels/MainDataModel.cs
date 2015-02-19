@@ -59,5 +59,16 @@ namespace FitnessClient.DataModels
                 NotifyPropertyChanged("TrainingView");
             }
         }
+
+        private IView _einstellungenView;
+        public IView EinstellungenView
+        {
+            get { return _einstellungenView; }
+            set
+            {
+                _einstellungenView = value;
+                NotifyPropertyChanged("EinstellungenView");
+            }
+        }
     }
 }

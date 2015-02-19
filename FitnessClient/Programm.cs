@@ -15,10 +15,7 @@ namespace FitnessClient
     public partial class Programm
     {
         public int ProgrammId { get; set; }
-        public Nullable<int> PlanId { get; set; }
-        public Nullable<int> UebungId { get; set; }
-    
-        public virtual Uebung Uebung { get; set; }
-        public virtual Plan Plan { get; set; }
+        public int PlanId { get; set; }
+        public int UebungId { get; set; }
     }
 }

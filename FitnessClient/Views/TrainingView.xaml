@@ -2,48 +2,52 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:FitnessClientLibrary.Common;assembly=FitnessClientLibrary"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <common:BoolInvertConverter x:Key="BoolInvertConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <TextBlock Text="Datum"/>
-        <ComboBox Grid.Row="0" Grid.Column="1"/>
-        <TextBlock Text="YouTube-URL" Grid.Row="0" Grid.Column="2"/>
-        <TextBox Text="{Binding MusicUrl}" Grid.Row="0" Grid.Column="3"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Tage}" SelectedValue="{Binding SelectedDatum}"/>
+        <!--<TextBlock Text="YouTube-URL" Grid.Row="0" Grid.Column="2"/>
+        <TextBox Text="{Binding YoutubeUrl}" Grid.Row="0" Grid.Column="3"/>-->
         <Button Content="Starten" Grid.Row="0" Grid.Column="4"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-            <Image Width="400" Height="300" HorizontalAlignment="Left"/>
+            <Image Width="400" Height="300" Source="{Binding Bild}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
-        
+
         <StackPanel Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2">
-            <TextBlock Text="{Binding Name}"/>
-            <TextBlock Text="{Binding Beschreibung}"/>
+            <TextBlock Text="{Binding SelectedUebung.Name}" FontWeight="DemiBold"/>
+            <TextBlock Text="{Binding SelectedUebung.Beschreibung}"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Width="260" Content="Nächste Übung" Command="{Binding NextUebungCommand}" IsEnabled="{Binding NextVisible}" />
+            </StackPanel>
         </StackPanel>
-        
-        <TextBlock Text="Training absolviert?" Grid.Row="2" Grid.Column="0"/>
-        <CheckBox Content="Ja" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
+
+        <CheckBox Content="Training wurde absolviert" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="2" IsChecked="{Binding SelectedTraining.Absolviert}"/>
         <TextBlock Text="Bemerkung" Grid.Row="2" Grid.Column="2"/>
-        <TextBox Text="{Binding Bemerkung}" Grid.Row="2" Grid.Column="3"/>
-        <Button Content="Speichern" Grid.Row="2" Grid.Column="4"/>
+        <TextBox Text="{Binding SelectedTraining.Bemerkung}" Grid.Row="2" Grid.Column="3" Width="300" />
+        <Button Content="Speichern" Grid.Row="2" Grid.Column="4" Command="{Binding SaveCommand}" IsEnabled="{Binding NextVisible, Converter={StaticResource BoolInvertConverter}}"/>
     </Grid>
 </UserControl>

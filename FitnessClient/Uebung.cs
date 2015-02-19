@@ -14,21 +14,15 @@ namespace FitnessClient
     
     public partial class Uebung
     {
-        public Uebung()
-        {
-            this.Programm = new HashSet<Programm>();
-        }
-    
         public int UebungId { get; set; }
         public string Name { get; set; }
         public string Beschreibung { get; set; }
         public string Bildpfad { get; set; }
-        public int Stufe { get; set; }
+        public Nullable<int> Stufe { get; set; }
         public Nullable<int> StdWiederholung { get; set; }
         public Nullable<int> StdDauer { get; set; }
-        public int ThemaId { get; set; }
+        public Nullable<int> ThemaId { get; set; }
     
-        public virtual ICollection<Programm> Programm { get; set; }
         public virtual Thema Thema { get; set; }
     }
 }

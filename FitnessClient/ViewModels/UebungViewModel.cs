@@ -10,9 +10,12 @@ namespace FitnessClient.ViewModels
     {
         public UebungViewModel()
         {
+            NeueUebung = new Uebung();
             Verzeichnisse = FitnessDataService.Instance.VerzeichnisService.Select();
             SelectedVerzeichnis = new ObservableProperty<Verzeichnis>();
             SelectedVerzeichnis.Subscribe(ChangeVerzeichnis);
+            NeuSelectedVerzeichnis = new ObservableProperty<Verzeichnis>();
+            NeuSelectedVerzeichnis.Subscribe(ChangeNeuVerzeichnis);
             SelectedThema = new ObservableProperty<Thema>();
             SelectedThema.Subscribe(ChangeThema);
         }
@@ -22,6 +25,15 @@ namespace FitnessClient.ViewModels
             if (verzeichnis != null)
             {
                 Themen = FitnessDataService.Instance.ThemaService.Select()
+                                           .Where(x => x.VerzeichnisId == verzeichnis.VerzeichnisId);
+            }
+        }
+        
+        private void ChangeNeuVerzeichnis(Verzeichnis verzeichnis)
+        {
+            if (verzeichnis != null)
+            {
+                ThemenNeu = FitnessDataService.Instance.ThemaService.Select()
                                            .Where(x => x.VerzeichnisId == verzeichnis.VerzeichnisId);
             }
         }
@@ -46,7 +58,7 @@ namespace FitnessClient.ViewModels
         private void Add(object value)
         {
             FitnessDataService.Instance.UebungService.Insert(NeueUebung);
-            Verzeichnisse = FitnessDataService.Instance.VerzeichnisService.Select();
+            NeueUebung = new Uebung();
         }
 
         private RelayCommand _saveCommand;

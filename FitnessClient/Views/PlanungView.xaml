@@ -53,7 +53,8 @@
                 <ComboBox Width="120" ItemsSource="{Binding Weeks}" SelectedItem="{Binding SelectedWeek.Value}" Grid.Row="0" Grid.Column="1"/>
 
                 <TextBlock Text="Wochentag:" Grid.Row="1" Grid.Column="0"/>
-                <ComboBox Width="120" ItemsSource="{Binding Weekdays}" SelectedValue="{Binding SelectedWeekday.Value}" Grid.Row="1" Grid.Column="1"/>
+                <ComboBox Width="120"  Grid.Row="1" Grid.Column="1" DisplayMemberPath="Item1"
+                          ItemsSource="{Binding Weekdays}" SelectedValue="{Binding SelectedWeekday.Value}"/>
             </Grid>
         </StackPanel>
 
@@ -66,7 +67,7 @@
                     <TextBlock Text="{Binding Name}" FontSize="14"/>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" FontSize="14"/>
+                            <TextBlock Text="{Binding Name}" FontSize="14" Height="24"/>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
@@ -78,7 +79,7 @@
             <Button Command="{Binding UebungDeleteCommand}" Content="x" Width="25" />
         </StackPanel>
 
-        <TreeView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedUebungen, Mode=TwoWay}" Width="350" Height="350" HorizontalAlignment="Right">
+        <TreeView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedThemen, Mode=TwoWay}" Width="350" Height="350" HorizontalAlignment="Right">
             <e:Interaction.Behaviors>
                 <behaviors:SelectableTreeViewBehavior SelectedItem="{Binding SelectedUebungItem, Mode=TwoWay}"/>
             </e:Interaction.Behaviors>
@@ -93,7 +94,5 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-
-        <Button Content="Plan speichern" Command="{Binding SavePlanCommand}" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right"/>
     </Grid>
 </UserControl>

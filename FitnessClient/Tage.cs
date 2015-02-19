@@ -12,11 +12,11 @@ namespace FitnessClient
     using System;
     using System.Collections.Generic;
     
-    public partial class Training
+    public partial class Tage
     {
-        public int TrainingId { get; set; }
-        public int PlanId { get; set; }
-        public Nullable<bool> Absolviert { get; set; }
-        public string Bemerkung { get; set; }
+        public int DatumId { get; set; }
+        public Nullable<System.DateTime> Datum { get; set; }
+        public Nullable<int> Jahr { get; set; }
+        public string Wochentag { get; set; }
     }
 }

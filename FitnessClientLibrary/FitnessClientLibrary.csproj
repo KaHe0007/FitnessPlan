@@ -51,6 +51,7 @@
     <Compile Include="Command\IExtendedAsyncCommand.cs" />
     <Compile Include="Command\IExtendedCommand.cs" />
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Common\BoolInvertConverter.cs" />
     <Compile Include="Common\EnableLogging.cs" />
     <Compile Include="Common\IView.cs" />
     <Compile Include="Common\ObservableProperty.cs" />

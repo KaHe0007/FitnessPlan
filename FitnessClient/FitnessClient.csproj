@@ -61,6 +61,7 @@
     <Compile Include="Benutzer.cs">
       <DependentUpon>FitnessAppDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModels\EinstellungenDataModel.cs" />
     <Compile Include="DataModels\MainDataModel.cs" />
     <Compile Include="DataModels\PlanungDataModel.cs" />
     <Compile Include="DataModels\ThemaDataModel.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="DataService\FitnessDataService.cs" />
     <Compile Include="DataService\PlanService.cs" />
     <Compile Include="DataService\ProgrammService.cs" />
+    <Compile Include="DataService\TageService.cs" />
     <Compile Include="DataService\ThemaService.cs" />
     <Compile Include="DataService\TrainingsartService.cs" />
     <Compile Include="DataService\UebungService.cs" />
@@ -81,10 +83,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FitnessAppDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="FitnessAppDb1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FitnessAppDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Plan.cs">
       <DependentUpon>FitnessAppDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Programm.cs">
+      <DependentUpon>FitnessAppDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tage.cs">
       <DependentUpon>FitnessAppDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Thema.cs">
@@ -102,12 +112,16 @@
     <Compile Include="Verzeichnis.cs">
       <DependentUpon>FitnessAppDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\EinstellungenViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PlanungViewModel.cs" />
     <Compile Include="ViewModels\ThemaViewModel.cs" />
     <Compile Include="ViewModels\TrainingViewModel.cs" />
     <Compile Include="ViewModels\UebungViewModel.cs" />
     <Compile Include="ViewModels\VerzeichnisViewModel.cs" />
+    <Compile Include="Views\EinstellungenView.xaml.cs">
+      <DependentUpon>EinstellungenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlanungView.xaml.cs">
       <DependentUpon>PlanungView.xaml</DependentUpon>
     </Compile>
@@ -146,6 +160,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EinstellungenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,7 +222,7 @@
     <None Include="FitnessAppDb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FitnessAppDb.edmx</DependentUpon>
-      <LastGenOutput>FitnessAppDb.cs</LastGenOutput>
+      <LastGenOutput>FitnessAppDb1.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -216,7 +234,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\appproweb.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FitnessClientLibrary\FitnessClientLibrary.csproj">
       <Project>{636ac73c-29a8-4d9f-997e-43b22ac3419d}</Project>

@@ -6,13 +6,13 @@ namespace FitnessClient.DataModels
 {
     public class UebungDataModel : ModelBase
     {
-        private IEnumerable<Uebung> _Uebung;
+        private IEnumerable<Uebung> _uebung;
         public IEnumerable<Uebung> Uebung
         {
-            get { return _Uebung; }
+            get { return _uebung; }
             set
             {
-                _Uebung = value;
+                _uebung = value;
                 NotifyPropertyChanged("Uebung");
             }
         }
@@ -60,6 +60,17 @@ namespace FitnessClient.DataModels
                 NotifyPropertyChanged("SelectedVerzeichnis");
             }
         }
+        
+        private ObservableProperty<Verzeichnis> _neuSelectedVerzeichnis;
+        public ObservableProperty<Verzeichnis> NeuSelectedVerzeichnis
+        {
+            get { return _neuSelectedVerzeichnis; }
+            set
+            {
+                _neuSelectedVerzeichnis = value;
+                NotifyPropertyChanged("NeuSelectedVerzeichnis");
+            }
+        }
 
         private IEnumerable<Thema> _themen;
         public IEnumerable<Thema> Themen
@@ -69,6 +80,17 @@ namespace FitnessClient.DataModels
             {
                 _themen = value;
                 NotifyPropertyChanged("Themen");
+            }
+        }
+        
+        private IEnumerable<Thema> _themenNeu;
+        public IEnumerable<Thema> ThemenNeu
+        {
+            get { return _themenNeu; }
+            set
+            {
+                _themenNeu = value;
+                NotifyPropertyChanged("ThemenNeu");
             }
         }
 

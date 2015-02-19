@@ -32,7 +32,7 @@
                     <ComboBox Grid.Row="1" Grid.Column="1" Width="200" ItemsSource="{Binding Themen}" 
                               SelectedItem="{Binding SelectedThema.Value}" DisplayMemberPath="Name"/>
 
-                    <ListBox Width="380" Height="300" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,10,0"
+                    <ListBox Width="350" Height="280" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,10,0"
                              ItemsSource="{Binding Uebung}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedUebung}"/>
                 </Grid>
                 <Grid>
@@ -71,10 +71,11 @@
                     <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedUebung.Dauer}" />
 
                     <TextBlock Grid.Row="6" Text="Verzeichnis"/>
-                    <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Verzeichnisse}" DisplayMemberPath="Titel" />
+                    <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Verzeichnisse}" 
+                              DisplayMemberPath="Titel" SelectedValuePath="VerzeichnisId" />
 
                     <TextBlock Grid.Row="7" Text="Thema"/>
-                    <ComboBox Grid.Row="7" Grid.Column="1" Text="{Binding Themen}" DisplayMemberPath="Name" />
+                    <ComboBox Grid.Row="7" Grid.Column="1" Text="{Binding Themen}" DisplayMemberPath="Name" SelectedValuePath="ThemaId" />
 
                     <Button Grid.Row="8" Grid.Column="1" Command="{Binding SaveCommand}" Content="Speichern" HorizontalAlignment="Right"/>
                 </Grid>
@@ -91,35 +92,37 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Verzeichnis" Grid.Column="0"/>
-                <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Verzeichnisse}" DisplayMemberPath="Titel" />
+                <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Verzeichnisse}" 
+                          DisplayMemberPath="Titel" SelectedItem="{Binding NeuSelectedVerzeichnis.Value}" />
 
                 <TextBlock Grid.Row="0" Text="Thema" Grid.Column="2"/>
-                <ComboBox Grid.Row="0" Grid.Column="3" Text="{Binding Themen}" DisplayMemberPath="Name" />
+                <ComboBox Grid.Row="0" Grid.Column="3" ItemsSource="{Binding ThemenNeu}" DisplayMemberPath="Name"
+                          SelectedValuePath="ThemaId" SelectedValue="{Binding NeueUebung.ThemaId}"/>
 
                 <TextBlock Grid.Row="1" Text="Name"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NeuesThema.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NeueUebung.Name}" />
 
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="Beschreibung"/>
-                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding NeuesThema.Beschreibung}" />
+                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding NeueUebung.Beschreibung}" />
 
                 <TextBlock Grid.Row="2" Text="Bildpfad"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NeuesThema.Bildpfad}" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NeueUebung.Bildpfad}" />
 
                 <TextBlock Grid.Row="2" Grid.Column="2" Text="Stufe"/>
-                <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding NeuesThema.Stufe}" />
+                <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding NeueUebung.Stufe}" />
 
                 <TextBlock Grid.Row="3" Text="Wiederholung"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NeuesThema.Wiederholung}" />
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NeueUebung.Wiederholung}" />
 
                 <TextBlock Grid.Row="3" Grid.Column="2" Text="Dauer"/>
-                <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding NeuesThema.Dauer}" />
+                <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding NeueUebung.Dauer}" />
 
                 <Button Grid.Row="4" Grid.Column="3" Command="{Binding AddCommand}" Content="Speichern" HorizontalAlignment="Right"/>
             </Grid>

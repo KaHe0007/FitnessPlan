@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FitnessClientLibrary.Base;
 using FitnessClientLibrary.Common;
 
@@ -16,7 +17,7 @@ namespace FitnessClient.DataModels
                 NotifyPropertyChanged("Verzeichnisse");
             }
         }
-        
+
         private IEnumerable<Thema> _themen;
         public IEnumerable<Thema> Themen
         {
@@ -27,7 +28,18 @@ namespace FitnessClient.DataModels
                 NotifyPropertyChanged("Themen");
             }
         }
-        
+
+        private IEnumerable<Uebung> _uebungen;
+        public IEnumerable<Uebung> Uebungen
+        {
+            get { return _uebungen; }
+            set
+            {
+                _uebungen = value;
+                NotifyPropertyChanged("Uebungen");
+            }
+        }
+
         private IEnumerable<int> _weeks;
         public IEnumerable<int> Weeks
         {
@@ -49,9 +61,9 @@ namespace FitnessClient.DataModels
                 NotifyPropertyChanged("SelectedWeek");
             }
         }
-        
-        private IEnumerable<string> _weekdays;
-        public IEnumerable<string> Weekdays
+
+        private IList<Tuple<string, DateTime, int>> _weekdays;
+        public IList<Tuple<string, DateTime, int>> Weekdays
         {
             get { return _weekdays; }
             set
@@ -71,9 +83,9 @@ namespace FitnessClient.DataModels
                 NotifyPropertyChanged("Wochenplan");
             }
         }
-        
-        private ObservableProperty<string> _selectedWeekday;
-        public ObservableProperty<string> SelectedWeekday
+
+        private ObservableProperty<Tuple<string, DateTime, int>> _selectedWeekday;
+        public ObservableProperty<Tuple<string, DateTime, int>> SelectedWeekday
         {
             get { return _selectedWeekday; }
             set
@@ -94,14 +106,14 @@ namespace FitnessClient.DataModels
             }
         }
 
-        private List<Thema> _selectedUebungen;
-        public List<Thema> SelectedUebungen
+        private List<Thema> _selectedThemen;
+        public List<Thema> SelectedThemen
         {
-            get { return _selectedUebungen; }
+            get { return _selectedThemen; }
             set
             {
-                _selectedUebungen = value;
-                NotifyPropertyChanged("SelectedUebungen");
+                _selectedThemen = value;
+                NotifyPropertyChanged("SelectedThemen");
             }
         }
 

@@ -9,7 +9,7 @@ namespace FitnessClientLibrary.Helper
         public static IEnumerable<int> GetWeeks(DateTime dateTime)
         {
             var dfi = DateTimeFormatInfo.CurrentInfo;
-            var countWeeks = dfi.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+            var countWeeks = dfi.Calendar.GetWeekOfYear(dateTime, CalendarWeekRule.FirstDay, DayOfWeek.Monday) + 2;
             var weeks = new List<int>();
             for(var i = 1; i <= countWeeks; i++)
                 weeks.Add(i);
@@ -29,11 +29,11 @@ namespace FitnessClientLibrary.Helper
             return GetWeekOfYear(today).ToString().PadLeft(2, '0');
         }
 
-        public static string[] WeekDays()
-        {
-            return new [] {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"};
-            //return Enum.GetNames(typeof(DayOfWeek));
-        }
+        //public static string[] WeekDays()
+        //{
+        //    return new [] {"Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"};
+        //    //return Enum.GetNames(typeof(DayOfWeek));
+        //}
 
         public static DateTime FirstDateOfWeek(int year, int weekOfYear)
         {

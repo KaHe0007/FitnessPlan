@@ -14,16 +14,9 @@ namespace FitnessClient
     
     public partial class Verzeichnis
     {
-        public Verzeichnis()
-        {
-            this.Thema = new HashSet<Thema>();
-        }
-    
         public int VerzeichnisId { get; set; }
         public string Titel { get; set; }
         public string Beschreibung { get; set; }
         public string Quelle { get; set; }
-    
-        public virtual ICollection<Thema> Thema { get; set; }
     }
 }

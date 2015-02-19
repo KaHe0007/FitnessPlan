@@ -14,14 +14,7 @@ namespace FitnessClient
     
     public partial class Benutzer
     {
-        public Benutzer()
-        {
-            this.Plan = new HashSet<Plan>();
-        }
-    
         public int BenutzerId { get; set; }
         public string Name { get; set; }
-    
-        public virtual ICollection<Plan> Plan { get; set; }
     }
 }
