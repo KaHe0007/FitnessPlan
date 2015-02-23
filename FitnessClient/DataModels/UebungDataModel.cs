@@ -93,7 +93,7 @@ namespace FitnessClient.DataModels
                 NotifyPropertyChanged("ThemenNeu");
             }
         }
-
+       
         private ObservableProperty<Thema> _selectedThema;
         public ObservableProperty<Thema> SelectedThema
         {

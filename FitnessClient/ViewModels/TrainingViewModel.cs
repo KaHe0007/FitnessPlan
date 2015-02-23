@@ -21,14 +21,13 @@ namespace FitnessClient.ViewModels
 
         private void LoadTraing()
         {
-            var datum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum == DateTime.Now);
+            var datum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum.Value.ToShortDateString() == DateTime.Now.ToShortDateString());
             if (datum.Any())
             {
                 var plan = FitnessDataService.Instance.PlanService.Select().FirstOrDefault(x => x.DatumId == datum.First().DatumId);
                 if (plan != null)
                 {
-                    var programm =
-                        FitnessDataService.Instance.ProgrammService.Select().Where(x => x.PlanId == plan.PlanId);
+                    var programm = FitnessDataService.Instance.ProgrammService.Select().Where(x => x.PlanId == plan.PlanId);
                     Programm = programm.GetEnumerator();
                     Programm.MoveNext();
 

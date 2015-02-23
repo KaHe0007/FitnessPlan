@@ -74,5 +74,19 @@ namespace FitnessClient.ViewModels
         {
             FitnessDataService.Instance.UebungService.Update();
         }
+
+        private RelayCommand _deleteCommand;
+        public RelayCommand DeleteCommand
+        {
+            get
+            {
+                return _deleteCommand ?? (_deleteCommand = new RelayCommand(Delete));
+            }
+        }
+
+        private void Delete(object value)
+        {
+            FitnessDataService.Instance.UebungService.Delete(SelectedUebung);
+        }
     }
 }

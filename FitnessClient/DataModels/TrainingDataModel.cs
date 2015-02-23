@@ -44,7 +44,7 @@ namespace FitnessClient.DataModels
             set
             {
                 _nextVisible = value;
-                NotifyPropertyChanged("NextVisisble");
+                NotifyPropertyChanged("NextVisible");
             }
         }
 

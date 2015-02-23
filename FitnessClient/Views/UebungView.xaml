@@ -7,79 +7,66 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles.xaml"/>
+                <ResourceDictionary Source="../Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
-        <GroupBox Header="Übung">
-            <StackPanel Orientation="Horizontal">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Verzeichnis:" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Width="200" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Verzeichnisse}" 
+        <GroupBox Header="Übung bearbeiten">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Width="200" Grid.Row="0" ItemsSource="{Binding Verzeichnisse}" 
                               SelectedItem="{Binding SelectedVerzeichnis.Value}" DisplayMemberPath="Titel"/>
-
-                    <TextBlock Text="Thema:" Grid.Row="1" Grid.Column="0"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Width="200" ItemsSource="{Binding Themen}" 
+                
+                <ComboBox Grid.Row="1" Width="200" ItemsSource="{Binding Themen}" 
                               SelectedItem="{Binding SelectedThema.Value}" DisplayMemberPath="Name"/>
 
-                    <ListBox Width="350" Height="280" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,10,0"
+                <ListBox Grid.Row="2" Grid.RowSpan="7" Style="{StaticResource StyLstBoxMiddle}"
                              ItemsSource="{Binding Uebung}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedUebung}"/>
-                </Grid>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Name"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedUebung.Name}" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Name:"/>
+                <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding SelectedUebung.Name}" />
 
-                    <TextBlock Grid.Row="1" Text="Beschreibung"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedUebung.Beschreibung}" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Beschreibung:" VerticalAlignment="Top"/>
+                <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding SelectedUebung.Beschreibung}" Style="{StaticResource TxtBoxComment}" />
 
-                    <TextBlock Grid.Row="2" Text="Bildpfad"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedUebung.Bildpfad}" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Bildpfad:"/>
+                <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding SelectedUebung.Bildpfad}" />
 
-                    <TextBlock Grid.Row="3" Text="Stufe"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedUebung.Stufe}" />
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="Stufe:"/>
+                <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding SelectedUebung.Stufe}" />
 
-                    <TextBlock Grid.Row="4" Text="Wiederholung"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedUebung.Wiederholung}" />
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="Wiederholung:"/>
+                <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding SelectedUebung.StdWiederholung}" />
 
-                    <TextBlock Grid.Row="5" Text="Dauer"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedUebung.Dauer}" />
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="Dauer:"/>
+                <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding SelectedUebung.StdDauer}" />
 
-                    <TextBlock Grid.Row="6" Text="Verzeichnis"/>
-                    <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Verzeichnisse}" 
-                              DisplayMemberPath="Titel" SelectedValuePath="VerzeichnisId" />
+                <TextBlock Grid.Row="6" Grid.Column="1" Text="Thema:"/>
+                <ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{Binding Themen}" SelectedValue="{Binding SelectedUebung.ThemaId}"
+                          DisplayMemberPath="Name" SelectedValuePath="ThemaId" />
 
-                    <TextBlock Grid.Row="7" Text="Thema"/>
-                    <ComboBox Grid.Row="7" Grid.Column="1" Text="{Binding Themen}" DisplayMemberPath="Name" SelectedValuePath="ThemaId" />
-
-                    <Button Grid.Row="8" Grid.Column="1" Command="{Binding SaveCommand}" Content="Speichern" HorizontalAlignment="Right"/>
-                </Grid>
-            </StackPanel>
+                <Button Grid.Row="8" Grid.Column="2" Command="{Binding DeleteCommand}" Content="Löschen" HorizontalAlignment="Left"/>
+                <Button Grid.Row="8" Grid.Column="2" Command="{Binding SaveCommand}" Content="Speichern" HorizontalAlignment="Right"/>
+            </Grid>
         </GroupBox>
         <GroupBox Header="Neue Übung anlegen">
             <Grid>
@@ -98,30 +85,30 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Verzeichnis" Grid.Column="0"/>
+                <TextBlock Grid.Row="0" Text="Katalog:" Grid.Column="0"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Verzeichnisse}" 
                           DisplayMemberPath="Titel" SelectedItem="{Binding NeuSelectedVerzeichnis.Value}" />
 
-                <TextBlock Grid.Row="0" Text="Thema" Grid.Column="2"/>
+                <TextBlock Grid.Row="0" Text="Thema:" Grid.Column="2"/>
                 <ComboBox Grid.Row="0" Grid.Column="3" ItemsSource="{Binding ThemenNeu}" DisplayMemberPath="Name"
                           SelectedValuePath="ThemaId" SelectedValue="{Binding NeueUebung.ThemaId}"/>
 
-                <TextBlock Grid.Row="1" Text="Name"/>
+                <TextBlock Grid.Row="1" Text="Name:"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NeueUebung.Name}" />
 
-                <TextBlock Grid.Row="1" Grid.Column="2" Text="Beschreibung"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="Beschreibung:"/>
                 <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding NeueUebung.Beschreibung}" />
 
-                <TextBlock Grid.Row="2" Text="Bildpfad"/>
+                <TextBlock Grid.Row="2" Text="Bildpfad:"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NeueUebung.Bildpfad}" />
 
-                <TextBlock Grid.Row="2" Grid.Column="2" Text="Stufe"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="Stufe:"/>
                 <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding NeueUebung.Stufe}" />
 
-                <TextBlock Grid.Row="3" Text="Wiederholung"/>
+                <TextBlock Grid.Row="3" Text="Wiederholung:"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NeueUebung.Wiederholung}" />
 
-                <TextBlock Grid.Row="3" Grid.Column="2" Text="Dauer"/>
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="Dauer:"/>
                 <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding NeueUebung.Dauer}" />
 
                 <Button Grid.Row="4" Grid.Column="3" Command="{Binding AddCommand}" Content="Speichern" HorizontalAlignment="Right"/>

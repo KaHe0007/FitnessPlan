@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles.xaml"/>
+                <ResourceDictionary Source="../Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -75,8 +75,8 @@
         </TreeView>
 
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <Button Command="{Binding UebungAddCommand}" Content=">" Width="25" />
-            <Button Command="{Binding UebungDeleteCommand}" Content="x" Width="25" />
+            <Button Command="{Binding UebungAddCommand}" Content=">>" Width="25" />
+            <Button Command="{Binding UebungDeleteCommand}" Content="&#60;&#60;" Width="25" />
         </StackPanel>
 
         <TreeView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedThemen, Mode=TwoWay}" Width="350" Height="350" HorizontalAlignment="Right">
@@ -88,7 +88,7 @@
                     <TextBlock Text="{Binding Name}" FontSize="14"/>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" FontSize="14" Height="24"/>
+                            <TextBlock Text="{Binding Name}" FontSize="14" Height="25"/>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
