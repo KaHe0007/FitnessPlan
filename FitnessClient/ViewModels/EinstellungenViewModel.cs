@@ -1,11 +1,18 @@
 ﻿using System;
+using FitnessClient.DataModels;
 using FitnessClient.DataService;
 using FitnessClientLibrary.Command;
 
 namespace FitnessClient.ViewModels
 {
-    public class EinstellungenViewModel
+    public class EinstellungenViewModel : EinstellungenDataModel
     {
+        public EinstellungenViewModel()
+        {
+            YoutubeUrl = Properties.Settings.Default.YouTubeUrl;
+            Bildpfad = Properties.Settings.Default.Bildpfad;
+        }
+
         private RelayCommand _createDaysCommand;
         public RelayCommand CreateDaysCommand
         {

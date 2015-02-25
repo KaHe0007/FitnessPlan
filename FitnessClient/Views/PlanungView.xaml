@@ -13,86 +13,88 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <GroupBox Header="Übungen einplanen" Padding="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0">
-            <TextBlock Text="Verzeichnis wählen:"/>
-            <ComboBox Width="200" ItemsSource="{Binding Verzeichnisse}" 
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <TextBlock Text="Katalog wählen:"/>
+                <ComboBox Width="200" ItemsSource="{Binding Verzeichnisse}" 
                           DisplayMemberPath="Titel" SelectedItem="{Binding SelectedVerzeichnis.Value}"/>
-        </StackPanel>
+            </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Kalenderwoche:" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox Width="120" ItemsSource="{Binding Weeks}" SelectedItem="{Binding SelectedWeek.Value}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="Kalenderwoche:" Grid.Row="0" Grid.Column="0"/>
+                    <ComboBox Width="120" ItemsSource="{Binding Weeks}" SelectedItem="{Binding SelectedWeek.Value}" Grid.Row="0" Grid.Column="1"/>
 
-                <TextBlock Text="Wochentag:" Grid.Row="1" Grid.Column="0"/>
-                <ComboBox Width="120"  Grid.Row="1" Grid.Column="1" DisplayMemberPath="Item1"
+                    <TextBlock Text="Wochentag:" Grid.Row="1" Grid.Column="0"/>
+                    <ComboBox Width="120"  Grid.Row="1" Grid.Column="1" DisplayMemberPath="Item1"
                           ItemsSource="{Binding Weekdays}" SelectedValue="{Binding SelectedWeekday.Value}"/>
-            </Grid>
-        </StackPanel>
+                </Grid>
+            </StackPanel>
 
-        <TreeView Grid.Row="1" Grid.Column="0" Grid.RowSpan="7" Height="350" Width="350" ItemsSource="{Binding Themen}" HorizontalAlignment="Left">
-            <e:Interaction.Behaviors>
-                <behaviors:SelectableTreeViewBehavior SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}"/>
-            </e:Interaction.Behaviors>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Uebung}">
-                    <TextBlock Text="{Binding Name}" FontSize="14"/>
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" FontSize="14" Height="24"/>
-                        </DataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+            <TreeView Grid.Row="1" Grid.Column="0" Grid.RowSpan="7" Height="350" Width="350" ItemsSource="{Binding Themen}" HorizontalAlignment="Left">
+                <e:Interaction.Behaviors>
+                    <behaviors:SelectableTreeViewBehavior SelectedItem="{Binding SelectedTreeItem, Mode=TwoWay}"/>
+                </e:Interaction.Behaviors>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Uebung}">
+                        <TextBlock Text="{Binding Name}" FontSize="14"/>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" FontSize="14" Height="24"/>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
-            <Button Command="{Binding UebungAddCommand}" Content=">>" Width="25" />
-            <Button Command="{Binding UebungDeleteCommand}" Content="&#60;&#60;" Width="25" />
-        </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                <Button Command="{Binding UebungAddCommand}" Content=">>" Width="25" HorizontalAlignment="Left" />
+                <Button Command="{Binding UebungDeleteCommand}" Content="&#60;&#60;" Width="25" HorizontalAlignment="Left" />
+            </StackPanel>
 
-        <TreeView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedThemen, Mode=TwoWay}" Width="350" Height="350" HorizontalAlignment="Right">
-            <e:Interaction.Behaviors>
-                <behaviors:SelectableTreeViewBehavior SelectedItem="{Binding SelectedUebungItem, Mode=TwoWay}"/>
-            </e:Interaction.Behaviors>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Uebung}">
-                    <TextBlock Text="{Binding Name}" FontSize="14"/>
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" FontSize="14" Height="25"/>
-                        </DataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-    </Grid>
+            <TreeView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedThemen, Mode=TwoWay}" Width="350" Height="350" HorizontalAlignment="Left">
+                <e:Interaction.Behaviors>
+                    <behaviors:SelectableTreeViewBehavior SelectedItem="{Binding SelectedUebungItem, Mode=TwoWay}"/>
+                </e:Interaction.Behaviors>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Uebung}">
+                        <TextBlock Text="{Binding Name}" FontSize="14"/>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" FontSize="14" Height="25"/>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
+    </GroupBox>
 </UserControl>

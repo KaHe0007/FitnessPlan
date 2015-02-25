@@ -32,7 +32,7 @@ namespace FitnessClient
         public DbSet<Thema> Thema { get; set; }
         public DbSet<Training> Training { get; set; }
         public DbSet<Trainingsart> Trainingsart { get; set; }
-        public DbSet<Uebung> Uebung { get; set; }
         public DbSet<Verzeichnis> Verzeichnis { get; set; }
+        public DbSet<Uebung> Uebung { get; set; }
     }
 }

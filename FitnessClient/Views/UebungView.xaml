@@ -94,10 +94,10 @@
                           SelectedValuePath="ThemaId" SelectedValue="{Binding NeueUebung.ThemaId}"/>
 
                 <TextBlock Grid.Row="1" Text="Name:"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NeueUebung.Name}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NeueUebung.Name}" Style="{StaticResource TxtBoxComment}" />
 
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="Beschreibung:"/>
-                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding NeueUebung.Beschreibung}" />
+                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding NeueUebung.Beschreibung}" Style="{StaticResource TxtBoxComment}" />
 
                 <TextBlock Grid.Row="2" Text="Bildpfad:"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NeueUebung.Bildpfad}" />
@@ -106,10 +106,10 @@
                 <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding NeueUebung.Stufe}" />
 
                 <TextBlock Grid.Row="3" Text="Wiederholung:"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NeueUebung.Wiederholung}" />
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding NeueUebung.StdWiederholung}" />
 
                 <TextBlock Grid.Row="3" Grid.Column="2" Text="Dauer:"/>
-                <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding NeueUebung.Dauer}" />
+                <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding NeueUebung.StdDauer}" />
 
                 <Button Grid.Row="4" Grid.Column="3" Command="{Binding AddCommand}" Content="Speichern" HorizontalAlignment="Right"/>
             </Grid>

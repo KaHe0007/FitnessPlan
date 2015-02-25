@@ -3,7 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style TargetType="{x:Type Button}">
         <Setter Property="Height" Value="30"/>
         <Setter Property="Width" Value="100"/>
@@ -35,11 +35,101 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="4" Background="{StaticResource ResourceKey=GradientBrushSegmentedActiveTabItem}" BorderBrush="{StaticResource ScbBorderLightDisabled}" BorderThickness="1" >
+                                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+    <Style x:Key="StyButtonLeft" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="4,0,0,4" Background="{StaticResource ResourceKey=GradientBrushSegmentedTabItem}" BorderBrush="{StaticResource ScbBorderLight}" BorderThickness="1" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="4,0,0,4" Background="{StaticResource ResourceKey=GradientBrushSegmentedActiveTabItem}" BorderBrush="{StaticResource ScbBorderLightDisabled}" BorderThickness="1" >
+                                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="StyButtonRight" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="0,4,4,0" Background="{StaticResource ResourceKey=GradientBrushSegmentedTabItem}" BorderBrush="{StaticResource ScbBorderLight}" BorderThickness="1" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="0,4,4,0" Background="{StaticResource ResourceKey=GradientBrushSegmentedActiveTabItem}" BorderBrush="{StaticResource ScbBorderLightDisabled}" BorderThickness="1" >
+                                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="StyButtonMiddle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="0" Background="{StaticResource ResourceKey=GradientBrushSegmentedTabItem}" BorderBrush="{StaticResource ScbBorderLight}" BorderThickness="1" >
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="0" Background="{StaticResource ResourceKey=GradientBrushSegmentedActiveTabItem}" BorderBrush="{StaticResource ScbBorderLightDisabled}" BorderThickness="1" >
+                                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="StyBigButton" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="260"/> 
+        <Setter Property="Width" Value="260"/>
         <Setter Property="Height" Value="85"/>
         <Setter Property="Margin" Value="0, 20, 0, 0"/>
         <Setter Property="FontWeight" Value="DemiBold"/>
@@ -74,7 +164,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Height" Value="30"/>
         <Setter Property="Width" Value="200"/>
@@ -120,12 +210,12 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0,0,2,0"/>
     </Style>
-    
+
     <Style x:Key="StyTextBlockAsHeader" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="DemiBold"/>
-        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Padding" Value="5"/>
     </Style>
 
     <Style x:Key="TxtBoxComment" TargetType="{x:Type TextBox}">
@@ -156,18 +246,18 @@
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
-    
+
     <Style x:Key="StyLstBoxLong" TargetType="{x:Type ListBox}">
         <Setter Property="Height" Value="530"/>
         <Setter Property="Width" Value="480"/>
     </Style>
-    
+
     <Style x:Key="StyLstBoxSmall" TargetType="{x:Type ListBox}">
         <Setter Property="Height" Value="240"/>
         <Setter Property="Width" Value="200"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
-    
+
     <Style x:Key="StyLstBoxMiddle" TargetType="{x:Type ListBox}">
         <Setter Property="Height" Value="260"/>
         <Setter Property="Width" Value="260"/>

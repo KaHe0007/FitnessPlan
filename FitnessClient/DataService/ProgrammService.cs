@@ -17,9 +17,9 @@ namespace FitnessClient.DataService
 
         public Programm Insert(Programm element)
         {
-            EntityManager.FitnessAppEntities.Programm.Add(element);
+            var result = EntityManager.FitnessAppEntities.Programm.Add(element);
             EntityManager.FitnessAppEntities.SaveChanges();
-            return element;
+            return result;
         }
 
         public void Update()

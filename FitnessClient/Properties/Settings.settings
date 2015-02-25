@@ -1,7 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FitnessClient.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="YouTubeUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.youtube.com/watch?x-yt-cl=85114404&amp;v=b2gGoQWDyps&amp;x-yt-ts=1422579428</Value>
+    </Setting>
+    <Setting Name="Bildpfad" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\NBKHENTSCHEL\SkyDrive\Dokumente\Fitnessplan\Bilder\</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

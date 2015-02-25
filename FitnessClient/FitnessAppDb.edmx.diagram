@@ -13,8 +13,8 @@
         <EntityTypeShape EntityType="FitnessAppModel.Thema" Width="1.5" PointX="6.875" PointY="2.75" />
         <EntityTypeShape EntityType="FitnessAppModel.Training" Width="1.5" PointX="2.5" PointY="2.75" />
         <EntityTypeShape EntityType="FitnessAppModel.Trainingsart" Width="1.5" PointX="4.5" PointY="3" />
-        <EntityTypeShape EntityType="FitnessAppModel.Uebung" Width="1.5" PointX="8.875" PointY="1.875" />
         <EntityTypeShape EntityType="FitnessAppModel.Verzeichnis" Width="1.5" PointX="4.75" PointY="0.5" />
+        <EntityTypeShape EntityType="FitnessAppModel.Uebung" Width="1.5" PointX="8.875" PointY="1.125" />
         <AssociationConnector Association="FitnessAppModel.FK_Uebung_Thema" />
         </Diagram>
     </edmx:Diagrams>

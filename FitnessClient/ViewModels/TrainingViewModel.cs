@@ -16,12 +16,12 @@ namespace FitnessClient.ViewModels
         public TrainingViewModel()
         {
             LoadDays();
-            LoadTraing();
+            LoadTraing(DateTime.Now.ToShortDateString());
         }
 
-        private void LoadTraing()
+        private void LoadTraing(string day)
         {
-            var datum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum.Value.ToShortDateString() == DateTime.Now.ToShortDateString());
+            var datum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum.Value.ToShortDateString() == day);
             if (datum.Any())
             {
                 var plan = FitnessDataService.Instance.PlanService.Select().FirstOrDefault(x => x.DatumId == datum.First().DatumId);
@@ -52,7 +52,10 @@ namespace FitnessClient.ViewModels
                 Bild = "http://www.womenshealthmag.com/files/wh6_uploads/images/fitness-habits-02.jpg";
             else
             {
-                Bild = imagePath;
+                if (imagePath.Contains("http"))
+                    Bild = imagePath;
+                else
+                    Bild = Properties.Settings.Default.Bildpfad + imagePath;
             }
         }
 
@@ -85,7 +88,22 @@ namespace FitnessClient.ViewModels
         
         private void Save(object value)
         {
-            
+            //TODO: Test
+            FitnessDataService.Instance.UebungService.Update();
+        }
+        
+        private RelayCommand _startCommand;
+        public RelayCommand StartCommand
+        {
+            get
+            {
+                return _startCommand ?? (_startCommand = new RelayCommand(Start));
+            }
+        }
+        
+        private void Start(object value)
+        {
+            LoadTraing(SelectedDatum);
         }
 
         private RelayCommand _nextUebungCommand;

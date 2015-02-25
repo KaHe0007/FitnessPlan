@@ -98,8 +98,8 @@ namespace FitnessClient.ViewModels
                 {
                     foreach (var t in Themen.ToList())
                     {
-                        Uebungen = FitnessDataService.Instance.UebungService.Select()
-                                              .Where(x => x.ThemaId == t.ThemaId).ToList();
+                        var themaId = t.ThemaId;
+                        Uebungen = FitnessDataService.Instance.UebungService.Select().Where(x => x.ThemaId == themaId).ToList();
                     }
                 }
             }
@@ -121,7 +121,7 @@ namespace FitnessClient.ViewModels
                         var uebungen = tagesprogramm.Select(programm => FitnessDataService.Instance.UebungService.Select()
                                                   .First(x => x.UebungId == programm.UebungId)).ToList();
 
-                        var tempThemen = SelectedThemen;
+                        var tempThemen = new List<Thema>();
                         foreach (var uebung in uebungen)
                         {
                             var thema = tempThemen.Where(x => x.ThemaId == uebung.ThemaId);
@@ -135,8 +135,7 @@ namespace FitnessClient.ViewModels
                                 if (uebung.ThemaId != null)
                                 {
                                     //Thema muss erst angelegt werden
-                                    var uebungWithThema =
-                                        FitnessDataService.Instance.ThemaService.Select()
+                                    var uebungWithThema = FitnessDataService.Instance.ThemaService.Select()
                                                           .First(x => x.ThemaId == uebung.ThemaId);
                                     var newThema = uebungWithThema;
                                     newThema.Uebung.Clear();
@@ -162,6 +161,7 @@ namespace FitnessClient.ViewModels
 
         private void UebungAdd(object value)
         {
+            //TODO: Die Datenbank wird warum auch immer umgesetzt
             var thema = SelectedTreeItem as Thema;
             if (thema != null)
             {
@@ -230,7 +230,6 @@ namespace FitnessClient.ViewModels
                 }
             }
             SubscribeWeekday(SelectedWeekday.Value);
-            //TODO: Ansicht wird nicht aktualisiert
         }
     }
 }

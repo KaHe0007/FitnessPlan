@@ -35,8 +35,8 @@
                 <TextBlock Text="Quelle:" Grid.Row="1" Grid.Column="1"/>
                 <TextBox Text="{Binding SelectedVerzeichnis.Quelle}" Grid.Row="1" Grid.Column="2"/>
                 
-                <TextBlock Text="Beschreibung:" Grid.Row="2" Grid.Column="1"/>
-                <TextBox Text="{Binding SelectedVerzeichnis.Beschreibung}" Grid.Row="2" Grid.Column="2" Width="300"/>
+                <TextBlock Text="Beschreibung:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Margin="0,8,0,0"/>
+                <TextBox Text="{Binding SelectedVerzeichnis.Beschreibung}" Grid.Row="2" Grid.Column="2" Style="{StaticResource TxtBoxComment}"/>
                 
                 <Button Grid.Row="3" Grid.Column="2" Content="Speichern" Command="{Binding SaveCommand}" HorizontalAlignment="Right" />
             </Grid>
@@ -44,6 +44,7 @@
         <GroupBox Header="Neu anlegen" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
@@ -57,13 +58,13 @@
                 <TextBlock Text="Titel:"/>
                 <TextBox Text="{Binding NeuesVerzeichnis.Titel}" Grid.Row="0" Grid.Column="1"/>
 
-                <TextBlock Text="Quelle:" Grid.Row="0" Grid.Column="2"/>
-                <TextBox Text="{Binding NeuesVerzeichnis.Quelle}" Grid.Row="0" Grid.Column="3"/>
+                <TextBlock Text="Beschreibung:" Grid.Row="0" Grid.Column="2"/>
+                <TextBox Text="{Binding NeuesVerzeichnis.Beschreibung}" Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Style="{StaticResource TxtBoxComment}"/>
 
-                <TextBlock Text="Beschreibung:" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Text="{Binding NeuesVerzeichnis.Beschreibung}" Grid.Row="1" Grid.Column="1" Width="280" Grid.ColumnSpan="3"/>
-                
-                <Button Content="Hinzufügen" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" Command="{Binding AddCommand}"/>
+                <TextBlock Text="Quelle:" Grid.Row="1" Grid.Column="0"/>
+                <TextBox Text="{Binding NeuesVerzeichnis.Quelle}" Grid.Row="1" Grid.Column="1"/>
+
+                <Button Content="Hinzufügen" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right" Command="{Binding AddCommand}"/>
             </Grid>
         </GroupBox>
     </StackPanel>

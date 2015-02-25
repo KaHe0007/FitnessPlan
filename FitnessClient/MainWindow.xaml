@@ -1,21 +1,23 @@
 ﻿<Window x:Class="FitnessClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FitnessClient" Height="700" Width="850">
+        Title="FitnessClient" Height="800" Width="900">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles\Styles.xaml"/>
-                <ResourceDictionary Source="Styles\TabControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <TabControl Margin="3" Style="{DynamicResource ResourceKey=StyleTabControl}">
-        <TabItem Header="Training" Content="{Binding TrainingView}" Style="{DynamicResource ResourceKey=StyleTabItemSingle}"/>
-        <TabItem Header="Planung" Content="{Binding PlanungView}" Style="{DynamicResource ResourceKey=StyleTabItemLeft}"/>
-        <TabItem Header="Kataloge" Content="{Binding VerzeichnisView}" Style="{DynamicResource ResourceKey=StyleTabItemDefault}"/>
-        <TabItem Header="Themen" Content="{Binding ThemenView}" Style="{DynamicResource ResourceKey=StyleTabItemDefault}"/>
-        <TabItem Header="Übungen" Content="{Binding UebungView}" Style="{DynamicResource ResourceKey=StyleTabItemRight}"/>
-        <TabItem Header="Einstellungen" Content="{Binding EinstellungenView}" Style="{DynamicResource ResourceKey=StyleTabItemSingle}"/>
-    </TabControl>
+    <StackPanel>
+        <StackPanel Margin="8" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Training" Margin="0,0,5,0" Command="{Binding TrainingCommand}"/>
+            <Button Content="Planung" Style="{StaticResource StyButtonLeft}" Command="{Binding PlanungCommand}"/>
+            <Button Content="Kataloge" Style="{StaticResource StyButtonMiddle}" Command="{Binding KatalogeCommand}"/>
+            <Button Content="Themen" Style="{StaticResource StyButtonMiddle}" Command="{Binding ThemaCommand}"/>
+            <Button Content="Übungen" Style="{StaticResource StyButtonRight}" Command="{Binding UebungCommand}"/>
+            <Button Content="Einstellungen" Margin="5,0,0,0" Command="{Binding EinstellungenCommand}"/>
+        </StackPanel>
+        <ContentControl Content="{Binding ContentView}" Width="850" Height="660"/>
+    </StackPanel>
 </Window>

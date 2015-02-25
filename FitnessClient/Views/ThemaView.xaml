@@ -39,7 +39,7 @@
                           DisplayMemberPath="Art" SelectedValuePath="TrainingsartId" Grid.Row="1" Grid.Column="2"/>
 
                 <TextBlock Text="Beschreibung:" Grid.Row="2" Grid.Column="1" Margin="120,0,0,0"/>
-                <TextBox Text="{Binding SelectedThema.Beschreibung}" Grid.Row="2" Grid.Column="2"/>
+                <TextBox Text="{Binding SelectedThema.Beschreibung}" Grid.Row="2" Grid.Column="2" Style="{StaticResource TxtBoxComment}"/>
 
                 <Button Content="Speichern" Grid.Row="4" Grid.Column="2" Command="{Binding SaveCommand}" HorizontalAlignment="Right"/>
             </Grid>
@@ -47,6 +47,7 @@
         <GroupBox Header="Neues Thema anlegen">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -65,14 +66,14 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Thema:"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NeuesThema.Name}"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="2" Text="Trainingsart:" Margin="0,0,10,0"/>
-                <ComboBox Grid.Row="1" Grid.Column="3" Width="200" ItemsSource="{Binding Trainingsarten}" 
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="Beschreibung:"/>
+                <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding NeuesThema.Beschreibung}" Grid.RowSpan="2" Width="290" Style="{StaticResource TxtBoxComment}"/>
+                
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Trainingsart:" Margin="0,0,10,0"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Width="200" ItemsSource="{Binding Trainingsarten}" 
                           DisplayMemberPath="Art" SelectedValue="{Binding NeuesThema.TrainingsartId}" SelectedValuePath="TrainingsartId"/>
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Beschreibung:"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NeuesThema.Beschreibung}" Grid.ColumnSpan="3" Width="290"/>
-
-                <Button Grid.Row="2" Grid.Column="3" Content="Hinzufügen" Command="{Binding AddCommand}" HorizontalAlignment="Right"/>
+                <Button Grid.Row="3" Grid.Column="3" Content="Hinzufügen" Command="{Binding AddCommand}" HorizontalAlignment="Right"/>
             </Grid>
         </GroupBox>
     </StackPanel>
