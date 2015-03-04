@@ -33,11 +33,14 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Width="200" Grid.Row="0" ItemsSource="{Binding Verzeichnisse}" 
+                <TextBlock Text="Verzeichnis und Thema wählen:"></TextBlock>
+                <StackPanel Grid.Row="1">
+                <ComboBox Width="200" ItemsSource="{Binding Verzeichnisse}" 
                               SelectedItem="{Binding SelectedVerzeichnis.Value}" DisplayMemberPath="Titel"/>
                 
                 <ComboBox Grid.Row="1" Width="200" ItemsSource="{Binding Themen}" 
                               SelectedItem="{Binding SelectedThema.Value}" DisplayMemberPath="Name"/>
+                </StackPanel>
 
                 <ListBox Grid.Row="2" Grid.RowSpan="7" Style="{StaticResource StyLstBoxMiddle}"
                              ItemsSource="{Binding Uebung}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedUebung}"/>

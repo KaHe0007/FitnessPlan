@@ -4,6 +4,7 @@ using System.Linq;
 using FitnessClient.DataModels;
 using FitnessClient.DataService;
 using FitnessClientLibrary.Command;
+using FitnessClientLibrary.Common;
 using FitnessClientLibrary.Helper;
 
 namespace FitnessClient.ViewModels
@@ -15,13 +16,16 @@ namespace FitnessClient.ViewModels
 
         public TrainingViewModel()
         {
+            SelectedDatum = new ObservableProperty<string>();
+            SelectedDatum.Subscribe(LoadTraining);
+            SelectedDatum.Value = DateTime.Now.ToShortDateString();
             LoadDays();
-            LoadTraing(DateTime.Now.ToShortDateString());
+            LoadTraining(DateTime.Now.ToShortDateString());
         }
 
-        private void LoadTraing(string day)
+        private void LoadTraining(object element)
         {
-            var datum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum.Value.ToShortDateString() == day);
+            var datum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum.Value.ToShortDateString() == SelectedDatum.Value);
             if (datum.Any())
             {
                 var plan = FitnessDataService.Instance.PlanService.Select().FirstOrDefault(x => x.DatumId == datum.First().DatumId);
@@ -73,8 +77,6 @@ namespace FitnessClient.ViewModels
                            monday.AddDays(5).ToShortDateString(),
                            monday.AddDays(6).ToShortDateString()
                        };
-
-            SelectedDatum = Tage.First();
         }
 
         private RelayCommand _saveCommand;
@@ -88,23 +90,27 @@ namespace FitnessClient.ViewModels
         
         private void Save(object value)
         {
-            //TODO: Test
-            FitnessDataService.Instance.UebungService.Update();
+            //TODO: Bemerkung als Pflichtfeld
+            SelectedTraining.Absolviert = true;
+            if(SelectedTraining.TrainingId == 0)
+                FitnessDataService.Instance.TrainingService.Insert(SelectedTraining);
+            else
+                FitnessDataService.Instance.TrainingService.Update();
         }
         
-        private RelayCommand _startCommand;
-        public RelayCommand StartCommand
-        {
-            get
-            {
-                return _startCommand ?? (_startCommand = new RelayCommand(Start));
-            }
-        }
+        //private RelayCommand _startCommand;
+        //public RelayCommand StartCommand
+        //{
+        //    get
+        //    {
+        //        return _startCommand ?? (_startCommand = new RelayCommand(Start));
+        //    }
+        //}
         
-        private void Start(object value)
-        {
-            LoadTraing(SelectedDatum);
-        }
+        //private void Start(object value)
+        //{
+        //    LoadTraining(SelectedDatum);
+        //}
 
         private RelayCommand _nextUebungCommand;
         public RelayCommand NextUebungCommand

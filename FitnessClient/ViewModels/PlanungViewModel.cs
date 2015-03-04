@@ -17,7 +17,20 @@ namespace FitnessClient.ViewModels
         {
             Wochenplan = new List<Plan>();
             SelectedThemen = new List<Thema>();
-            LoadWeeksAndDays();
+            
+            var today = DateTime.Now;
+            var week = WeeksHelper.GetWeekOfYear(today);
+            Weeks = WeeksHelper.GetWeeks(today);
+            LoadWeekdays(week);
+
+            SelectedWeek = new ObservableProperty<int>();
+            SelectedWeek.Subscribe(SubscribeWeek);
+            SelectedWeek.Value = WeeksHelper.GetWeekOfYear(today) + 1; //Standardmäßig die nächste Woche auswählen
+
+            SelectedWeekday = new ObservableProperty<Tuple<string, DateTime, int>>();
+            SelectedWeekday.Subscribe(SubscribeWeekday);
+            SelectedWeekday.Value = Weekdays.First(); //Standardmäßig den Montag auswählen
+
             LoadTree();
         }
 
@@ -30,29 +43,27 @@ namespace FitnessClient.ViewModels
             SelectedVerzeichnis.Value = Verzeichnisse.First();
         }
 
-        private void LoadWeeksAndDays()
+        private void LoadWeekdays(int week)
         {
-            var today = DateTime.Now;
-            var week = WeeksHelper.GetWeekOfYear(today);
-            Weeks = WeeksHelper.GetWeeks(today);
-            Weekdays = new List<Tuple<string, DateTime, int>>();
+            var weekdays = new List<Tuple<string, DateTime, int>>();
 
-            var monday = WeeksHelper.FirstDateOfWeek(DateTime.Now.Year, week);
-            Weekdays.Add(new Tuple<string, DateTime, int>("Montag", monday, GetPlanId(monday)));
-            Weekdays.Add(new Tuple<string, DateTime, int>("Dienstag", monday.AddDays(1), GetPlanId(monday.AddDays(1))));
-            Weekdays.Add(new Tuple<string, DateTime, int>("Mittwoch", monday.AddDays(2), GetPlanId(monday.AddDays(2))));
-            Weekdays.Add(new Tuple<string, DateTime, int>("Donnerstag", monday.AddDays(3), GetPlanId(monday.AddDays(3))));
-            Weekdays.Add(new Tuple<string, DateTime, int>("Freitag", monday.AddDays(4), GetPlanId(monday.AddDays(4))));
-            Weekdays.Add(new Tuple<string, DateTime, int>("Samstag", monday.AddDays(5), GetPlanId(monday.AddDays(5))));
-            Weekdays.Add(new Tuple<string, DateTime, int>("Sonntag", monday.AddDays(6), GetPlanId(monday.AddDays(6))));
+            var montag = WeeksHelper.FirstDateOfWeek(DateTime.Now.Year, week);
+            var dienstag = montag.AddDays(1);
+            var mittwoch = montag.AddDays(2);
+            var donnerstag = montag.AddDays(3);
+            var freitag = montag.AddDays(4);
+            var samstag = montag.AddDays(5);
+            var sonntag = montag.AddDays(6);
 
-            SelectedWeek = new ObservableProperty<int>();
-            SelectedWeek.Subscribe(SubscribeWeek);
-            SelectedWeek.Value = WeeksHelper.GetWeekOfYear(today) + 1; //Standardmäßig die nächste Woche auswählen
+            weekdays.Add(new Tuple<string, DateTime, int>(string.Format("Montag ({0})", montag.ToShortDateString()), montag, GetPlanId(montag)));
+            weekdays.Add(new Tuple<string, DateTime, int>(string.Format("Dienstag ({0})", dienstag.ToShortDateString()), dienstag, GetPlanId(dienstag)));
+            weekdays.Add(new Tuple<string, DateTime, int>(string.Format("Mittwoch ({0})", mittwoch.ToShortDateString()), mittwoch, GetPlanId(mittwoch)));
+            weekdays.Add(new Tuple<string, DateTime, int>(string.Format("Donnerstag ({0})", donnerstag.ToShortDateString()), donnerstag, GetPlanId(donnerstag)));
+            weekdays.Add(new Tuple<string, DateTime, int>(string.Format("Freitag ({0})", freitag.ToShortDateString()), freitag, GetPlanId(freitag)));
+            weekdays.Add(new Tuple<string, DateTime, int>(string.Format("Samstag ({0})", samstag.ToShortDateString()), samstag, GetPlanId(samstag)));
+            weekdays.Add(new Tuple<string, DateTime, int>(string.Format("Sonntag ({0})", sonntag.ToShortDateString()), sonntag, GetPlanId(sonntag)));
 
-            SelectedWeekday = new ObservableProperty<Tuple<string, DateTime, int>>();
-            SelectedWeekday.Subscribe(SubscribeWeekday);
-            SelectedWeekday.Value = Weekdays.First(); //Standardmäßig den Montag auswählen
+            Weekdays = new List<Tuple<string, DateTime, int>>(weekdays);
         }
 
         private int GetPlanId(DateTime datum)
@@ -78,13 +89,17 @@ namespace FitnessClient.ViewModels
 
         private void SubscribeWeek(int week)
         {
+            LoadWeekdays(week);
             foreach (var day in Weekdays)
             {
                 var firstDatum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum == day.Item2);
-                var tag = FitnessDataService.Instance.PlanService.Select().First(x => x.DatumId == firstDatum.First().DatumId);
-                var datum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum == day.Item2);
-                if(datum.Any())
-                    Wochenplan.Add(tag ?? new Plan { BenutzerId = 1, DatumId = datum.First().DatumId });
+                if (firstDatum.Any())
+                {
+                    var tag = FitnessDataService.Instance.PlanService.Select().First(x => x.DatumId == firstDatum.First().DatumId);
+                    var datum = FitnessDataService.Instance.TageService.Select().Where(x => x.Datum == day.Item2);
+                    if (datum.Any())
+                        Wochenplan.Add(tag ?? new Plan {BenutzerId = 1, DatumId = datum.First().DatumId});
+                }
             }
         }
 

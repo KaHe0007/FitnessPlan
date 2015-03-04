@@ -46,15 +46,15 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Kalenderwoche:" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Width="120" ItemsSource="{Binding Weeks}" SelectedItem="{Binding SelectedWeek.Value}" Grid.Row="0" Grid.Column="1"/>
+                    <ComboBox Width="90" ItemsSource="{Binding Weeks}" SelectedItem="{Binding SelectedWeek.Value}" Grid.Row="0" Grid.Column="1"/>
 
                     <TextBlock Text="Wochentag:" Grid.Row="1" Grid.Column="0"/>
-                    <ComboBox Width="120"  Grid.Row="1" Grid.Column="1" DisplayMemberPath="Item1"
+                    <ComboBox Width="180"  Grid.Row="1" Grid.Column="1" DisplayMemberPath="Item1"
                           ItemsSource="{Binding Weekdays}" SelectedValue="{Binding SelectedWeekday.Value}"/>
                 </Grid>
             </StackPanel>

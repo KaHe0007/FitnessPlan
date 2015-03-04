@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="../Styles/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <common:BoolInvertConverter x:Key="BoolInvertConverter" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <GroupBox Header="aktuelles Trainingsprogramm">
@@ -29,8 +30,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Datum"/>
-            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Tage}" SelectedValue="{Binding SelectedDatum}"/>
-            <Button Content="Starten" Grid.Row="0" Grid.Column="2" Margin="10,0,0,0" Command="{Binding StartCommand}"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Tage}" SelectedValue="{Binding SelectedDatum.Value}"/>
+            <!--<Button Content="Starten" Grid.Row="0" Grid.Column="2" Margin="10,0,0,0" Command="{Binding StartCommand}"/>-->
 
             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
                 <Image Width="500" Height="400" Source="{Binding Bild}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -78,13 +79,15 @@
                 </Border>
 
                 <Button Grid.Row="3" Grid.ColumnSpan="3" Content="Nächste Übung" Style="{StaticResource StyBigButton}"
-                    Command="{Binding NextUebungCommand}" IsEnabled="{Binding NextVisible}" />
+                    Command="{Binding NextUebungCommand}" Visibility="{Binding NextVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
 
-            <TextBlock Text="Bemerkung" Grid.Row="2" Grid.Column="0"/>
-            <TextBox Text="{Binding SelectedTraining.Bemerkung}" Grid.Row="2" Grid.Column="1" Width="250" Grid.ColumnSpan="2" />
-            <CheckBox Content="Training absolviert" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Grid.ColumnSpan="2" IsChecked="{Binding SelectedTraining.Absolviert}"/>
-            <Button Content="Speichern" Grid.Row="2" Grid.Column="4" Command="{Binding SaveCommand}" IsEnabled="{Binding NextVisible, Converter={StaticResource BoolInvertConverter}}"/>
+            <!--<CheckBox Content="Training absolviert" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding SelectedTraining.Absolviert}"/>-->
+            <TextBlock Text="Bemerkung: " Grid.Row="2" Grid.Column="0"/>
+            <TextBox Text="{Binding SelectedTraining.Bemerkung}" Grid.Row="2" Grid.Column="1" Width="350" Grid.ColumnSpan="3" />
+            
+            <Button Content="Speichern" Grid.Row="2" Grid.Column="4" Command="{Binding SaveCommand}" HorizontalAlignment="Right"
+                    IsEnabled="{Binding NextVisible, Converter={StaticResource BoolInvertConverter}}"/>
         </Grid>
     </GroupBox>
 </UserControl>

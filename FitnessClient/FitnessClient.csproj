@@ -76,6 +76,7 @@
     <Compile Include="DataService\TageService.cs" />
     <Compile Include="DataService\ThemaService.cs" />
     <Compile Include="DataService\TrainingsartService.cs" />
+    <Compile Include="DataService\TrainingService.cs" />
     <Compile Include="DataService\UebungService.cs" />
     <Compile Include="DataService\VerzeichnisService.cs" />
     <Compile Include="FitnessAppDb.cs">

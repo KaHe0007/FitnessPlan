@@ -10,6 +10,7 @@
         public ProgrammService ProgrammService { get; set; }
         public BenutzerService BenutzerService { get; set; }
         public TageService TageService { get; set; }
+        public TrainingService TrainingService { get; set; }
 
         private static FitnessDataService _instance;
 
@@ -23,6 +24,7 @@
             ProgrammService = new ProgrammService();
             BenutzerService = new BenutzerService();
             TageService = new TageService();
+            TrainingService = new TrainingService();
         }
 
         public static FitnessDataService Instance

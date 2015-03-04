@@ -18,15 +18,22 @@
         </Grid.RowDefinitions>
         <GroupBox Header="Persönliche Einstellungen" Grid.Row="0">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="YouTube-URL:" Grid.Row="0" Grid.Column="0"/>
-                <TextBox Text="{Binding YoutubeUrl}" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="Bilderpfad: " Grid.Row="0" Grid.Column="0"/>
+                <TextBox Text="{Binding Bildpfad}" Grid.Row="0" Grid.Column="1" Width="550"/>
+                
+                <TextBlock Text="YouTube-URL: " Grid.Row="1" Grid.Column="0"/>
+                <TextBox Text="{Binding YoutubeUrl}" Grid.Row="1" Grid.Column="1" Width="550"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Erzeugung" Grid.Row="1">
+        <GroupBox Header="Sonstiges" Grid.Row="1">
             <Button Command="{Binding CreateDaysCommand}" Content="alle Tage des Jahres erzeugen" Width="200" HorizontalAlignment="Left" />
         </GroupBox>
     </Grid>

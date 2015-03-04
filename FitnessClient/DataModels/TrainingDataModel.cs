@@ -1,4 +1,5 @@
 ﻿using FitnessClientLibrary.Base;
+using FitnessClientLibrary.Common;
 
 namespace FitnessClient.DataModels
 {
@@ -15,8 +16,8 @@ namespace FitnessClient.DataModels
             }
         }
 
-        private string _selectedDatum;
-        public string SelectedDatum
+        private ObservableProperty<string> _selectedDatum;
+        public ObservableProperty<string> SelectedDatum
         {
             get { return _selectedDatum; }
             set
